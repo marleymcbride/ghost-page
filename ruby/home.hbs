@@ -1,0 +1,576 @@
+{{!< default}}
+
+<main class="landing-page">
+    {{!-- Hero Section --}}
+    <section class="hero-section">
+        <div class="gh-inner">
+            <div class="hero-content">
+                <h1 class="hero-title">
+                    Ditch the caffeine. Drop the alcohol.<br>
+                    <span class="hero-accent">Build the body of your dreams.</span>
+                </h1>
+                <p class="hero-subtitle">
+                    The Limitless Protocol™ - Elite health optimization for high-performers who are tired of feeling like shit every morning.
+                </p>
+
+                <div class="hero-cta">
+                    <div class="email-signup">
+                        <input type="email" placeholder="Enter your email" class="email-input" id="hero-email">
+                        <button class="cta-button" onclick="signupHero()">Get Started Free</button>
+                    </div>
+                    <p class="cta-subtext">Join 10,000+ executives who transformed their energy and physique</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    {{!-- Anti-Stack Section --}}
+    <section class="anti-stack-section">
+        <div class="gh-inner">
+            <div class="section-header">
+                <h2>The Anti-Stack™</h2>
+                <p class="section-subtitle">Wake up with incredible energy every morning. No caffeine, no pills, no bullshit.</p>
+            </div>
+
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">⚡</div>
+                    <h3>Drag Energy → Glide Energy</h3>
+                    <p>Stop fighting upstream against your biochemistry. Smooth, natural energy flow all day without chemical assistance.</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">🎯</div>
+                    <h3>The Natty Sweet Spot™</h3>
+                    <p>11-14% body fat where performance, aesthetics, and health converge. The ultimate natural male physique.</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">💪</div>
+                    <h3>2-3 Days Training</h3>
+                    <p>Minimal effective dose training. Build elite physique while preserving CNS for professional demands.</p>
+                </div>
+            </div>
+
+            <div class="cta-center">
+                <button class="secondary-cta auth-modal-trigger">Learn The Method</button>
+            </div>
+        </div>
+    </section>
+
+    {{!-- Work With Me Section --}}
+    <section class="work-section">
+        <div class="gh-inner">
+            <div class="work-content">
+                <div class="work-text">
+                    <h2>Ready to go from burnout to limitless?</h2>
+                    <p>The Limitless Protocol™ is for high-earning executives who want to:</p>
+                    <ul class="benefits-list">
+                        <li>Break free from caffeine and alcohol dependencies</li>
+                        <li>Wake up energized without stimulants</li>
+                        <li>Build an elite physique training 2-3x per week</li>
+                        <li>Optimize hormones naturally (no TRT needed)</li>
+                        <li>Reclaim control of your body and mind</li>
+                    </ul>
+
+                    <div class="work-cta">
+                        <a href="/limitless-protocol" class="primary-cta">
+                            Get The Limitless Protocol™
+                        </a>
+                        <p class="guarantee">60-day money-back guarantee</p>
+                    </div>
+                </div>
+
+                <div class="work-visual">
+                    <div class="transformation-card">
+                        <div class="before-after">
+                            <div class="stat">
+                                <span class="number">1000+</span>
+                                <span class="label">Days Sober</span>
+                            </div>
+                            <div class="stat">
+                                <span class="number">1 Year</span>
+                                <span class="label">Caffeine Free</span>
+                            </div>
+                            <div class="stat">
+                                <span class="number">Best Shape</span>
+                                <span class="label">Of My Life</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    {{!-- Latest Content Section --}}
+    <section class="content-section">
+        <div class="gh-inner">
+            <div class="section-header">
+                <h2>Latest Guides</h2>
+                <p class="section-subtitle">Elite-level content for men who demand better</p>
+            </div>
+
+            <div class="content-grid">
+                {{#get "posts" limit="3" as |recent_posts|}}
+                    {{#foreach recent_posts}}
+                        <article class="content-card">
+                            {{#if feature_image}}
+                                <div class="content-image">
+                                    <img src="{{feature_image}}" alt="{{title}}">
+                                    {{#primary_tag}}
+                                        <span class="content-tag">{{name}}</span>
+                                    {{/primary_tag}}
+                                </div>
+                            {{/if}}
+
+                            <div class="content-text">
+                                <h3><a href="{{url}}">{{title}}</a></h3>
+                                <p>{{excerpt}}</p>
+                                <div class="content-meta">
+                                    <span class="read-time">{{reading_time}}</span>
+                                    <a href="{{url}}" class="read-more">Read Guide →</a>
+                                </div>
+                            </div>
+                        </article>
+                    {{/foreach}}
+                {{/get}}
+            </div>
+
+            <div class="cta-center">
+                <a href="/blog" class="secondary-cta">View All Guides</a>
+            </div>
+        </div>
+    </section>
+</main>
+
+<style>
+.landing-page {
+    background: var(--bg-primary) !important;
+    color: var(--text-primary) !important;
+    min-height: 100vh;
+}
+
+/* Hero Section */
+.hero-section {
+    padding: 120px 0 160px;
+    background: var(--bg-primary) !important;
+    border-bottom: 1px solid var(--border-color);
+    text-align: center;
+}
+
+.hero-content {
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.hero-title {
+    font-size: 5rem !important;
+    font-weight: 800;
+    line-height: 1.1;
+    margin-bottom: 36px;
+    color: var(--text-primary) !important;
+}
+
+.hero-accent {
+    color: var(--accent-red) !important;
+}
+
+.hero-subtitle {
+    font-size: 2rem !important;
+    line-height: 1.5;
+    color: var(--text-secondary) !important;
+    margin-bottom: 60px;
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.email-signup {
+    display: flex;
+    gap: 16px;
+    margin-bottom: 20px;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+    justify-content: center;
+}
+
+.email-input {
+    flex: 1;
+    padding: 20px 24px;
+    border: 2px solid var(--border-color);
+    border-radius: 12px;
+    background: var(--bg-secondary) !important;
+    color: var(--text-primary) !important;
+    font-size: 1.2rem;
+    max-width: 350px;
+}
+
+.email-input:focus {
+    outline: none;
+    border-color: var(--accent-red);
+    box-shadow: 0 0 0 3px rgba(220, 38, 38, 0.1);
+}
+
+.email-input::placeholder {
+    color: var(--text-muted) !important;
+}
+
+.cta-button {
+    padding: 20px 40px;
+    background: var(--accent-red) !important;
+    color: white !important;
+    border: none;
+    border-radius: 12px;
+    font-weight: 700;
+    font-size: 1.2rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    white-space: nowrap;
+}
+
+.cta-button:hover {
+    background: #b91c1c !important;
+    transform: translateY(-2px);
+    box-shadow: 0 12px 30px rgba(220, 38, 38, 0.4);
+}
+
+.cta-subtext {
+    color: var(--text-muted) !important;
+    font-size: 1.1rem;
+    text-align: center;
+}
+
+/* Anti-Stack Section */
+.anti-stack-section {
+    padding: 140px 0;
+    background: var(--bg-secondary) !important;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.section-header {
+    text-align: center;
+    margin-bottom: 80px;
+}
+
+.section-header h2 {
+    font-size: 3.5rem !important;
+    font-weight: 700;
+    margin-bottom: 24px;
+    color: var(--text-primary) !important;
+}
+
+.section-subtitle {
+    font-size: 1.6rem !important;
+    color: var(--text-secondary) !important;
+    max-width: 700px;
+    margin: 0 auto;
+    line-height: 1.5;
+}
+
+.features-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 50px;
+    margin-bottom: 80px;
+}
+
+.feature-card {
+    background: var(--bg-tertiary) !important;
+    padding: 50px 40px;
+    border-radius: 16px;
+    border: 1px solid var(--border-color);
+    text-align: center;
+    transition: all 0.3s ease;
+}
+
+.feature-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+}
+
+.feature-icon {
+    font-size: 3.5rem;
+    margin-bottom: 24px;
+}
+
+.feature-card h3 {
+    font-size: 2rem !important;
+    font-weight: 600;
+    margin-bottom: 20px;
+    color: var(--text-primary) !important;
+}
+
+.feature-card p {
+    color: var(--text-secondary) !important;
+    line-height: 1.6;
+    font-size: 1.2rem !important;
+}
+
+/* Work Section */
+.work-section {
+    padding: 140px 0;
+    background: var(--bg-primary) !important;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.work-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 100px;
+    align-items: center;
+}
+
+.work-text h2 {
+    font-size: 3rem !important;
+    font-weight: 700;
+    margin-bottom: 32px;
+    color: var(--text-primary) !important;
+}
+
+.work-text p {
+    font-size: 1.4rem !important;
+    color: var(--text-secondary) !important;
+    margin-bottom: 32px;
+    line-height: 1.6;
+}
+
+.benefits-list {
+    list-style: none;
+    padding: 0;
+    margin-bottom: 50px;
+}
+
+.benefits-list li {
+    padding: 16px 0;
+    color: var(--text-secondary) !important;
+    position: relative;
+    padding-left: 40px;
+    font-size: 1.2rem !important;
+}
+
+.benefits-list li:before {
+    content: "✓";
+    color: var(--accent-red) !important;
+    font-weight: bold;
+    position: absolute;
+    left: 0;
+    font-size: 1.3rem;
+}
+
+.primary-cta {
+    display: inline-block;
+    padding: 24px 48px;
+    background: var(--accent-red) !important;
+    color: white !important;
+    text-decoration: none;
+    border-radius: 12px;
+    font-weight: 700;
+    font-size: 1.3rem;
+    transition: all 0.2s ease;
+}
+
+.primary-cta:hover {
+    background: #b91c1c !important;
+    transform: translateY(-3px);
+    box-shadow: 0 12px 30px rgba(220, 38, 38, 0.4);
+    text-decoration: none;
+    color: white !important;
+}
+
+.guarantee {
+    margin-top: 16px;
+    font-size: 1rem;
+    color: var(--text-muted) !important;
+}
+
+.transformation-card {
+    background: var(--bg-secondary) !important;
+    border: 1px solid var(--border-color);
+    border-radius: 16px;
+    padding: 50px;
+    text-align: center;
+}
+
+.before-after {
+    display: grid;
+    gap: 40px;
+}
+
+.stat {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.stat .number {
+    font-size: 2.4rem !important;
+    font-weight: 700;
+    color: var(--accent-red) !important;
+    margin-bottom: 12px;
+}
+
+.stat .label {
+    font-size: 1.1rem;
+    color: var(--text-secondary) !important;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+/* Content Section */
+.content-section {
+    padding: 140px 0;
+    background: var(--bg-secondary) !important;
+}
+
+.content-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
+    gap: 50px;
+    margin-bottom: 80px;
+}
+
+.content-card {
+    background: var(--bg-tertiary) !important;
+    border: 1px solid var(--border-color);
+    border-radius: 16px;
+    overflow: hidden;
+    transition: all 0.3s ease;
+}
+
+.content-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+}
+
+.content-image {
+    position: relative;
+    aspect-ratio: 16/9;
+    overflow: hidden;
+}
+
+.content-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.content-tag {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    background: var(--accent-red) !important;
+    color: white !important;
+    padding: 8px 16px;
+    border-radius: 6px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    text-transform: uppercase;
+}
+
+.content-text {
+    padding: 40px;
+}
+
+.content-text h3 {
+    margin-bottom: 20px;
+}
+
+.content-text h3 a {
+    color: var(--text-primary) !important;
+    text-decoration: none;
+    font-size: 1.6rem !important;
+    font-weight: 600;
+}
+
+.content-text h3 a:hover {
+    color: var(--accent-red) !important;
+}
+
+.content-text p {
+    color: var(--text-secondary) !important;
+    line-height: 1.6;
+    margin-bottom: 24px;
+    font-size: 1.1rem !important;
+}
+
+.content-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.read-time {
+    font-size: 1rem;
+    color: var(--text-muted) !important;
+}
+
+.read-more {
+    color: var(--accent-red) !important;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 1rem;
+}
+
+.read-more:hover {
+    color: #b91c1c !important;
+}
+
+/* CTAs */
+.cta-center {
+    text-align: center;
+}
+
+.secondary-cta {
+    display: inline-block;
+    padding: 18px 36px;
+    background: transparent;
+    color: var(--text-primary) !important;
+    border: 2px solid var(--border-color);
+    text-decoration: none;
+    border-radius: 12px;
+    font-weight: 600;
+    transition: all 0.2s ease;
+    font-size: 1.1rem;
+}
+
+.secondary-cta:hover {
+    background: var(--bg-tertiary) !important;
+    border-color: var(--accent-red) !important;
+    color: var(--text-primary) !important;
+    text-decoration: none;
+    transform: translateY(-2px);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .hero-title { font-size: 3.5rem !important; }
+    .hero-subtitle { font-size: 1.4rem !important; }
+    .section-header h2 { font-size: 2.5rem !important; }
+    .work-text h2 { font-size: 2.2rem !important; }
+    .email-signup { flex-direction: column; align-items: center; }
+    .work-content { grid-template-columns: 1fr; gap: 60px; }
+    .content-grid { grid-template-columns: 1fr; }
+    .features-grid { grid-template-columns: 1fr; }
+    .hero-section { padding: 80px 0 100px; }
+    .anti-stack-section, .work-section, .content-section { padding: 80px 0; }
+}
+</style>
+
+<script>
+function signupHero() {
+    const email = document.getElementById('hero-email').value;
+    if (!email) {
+        alert('Please enter your email address');
+        return;
+    }
+
+    // Open the auth modal for signup
+    const modal = document.getElementById('auth-modal');
+    if (modal) {
+        modal.style.display = 'flex';
+        document.body.style.overflow = 'hidden';
+    }
+}
+</script>
