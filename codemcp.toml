@@ -1,0 +1,8 @@
+# Ghost Theme Development Configuration
+
+[project]
+name = "ghost-theme-development"
+description = "Ghost theme customization for login system"
+
+[commands]
+# Add any specific commands if needed later
