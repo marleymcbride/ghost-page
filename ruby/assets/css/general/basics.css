@@ -42,40 +42,15 @@ body:not(.post-template):not(.page-template) {
     min-height: 100vh;
 }
 
-/* Dark Mode Overrides - Ruby Theme Method */
+/* Dark Mode Overrides - Ruby Theme Variables Method */
 body.dark {
     --primary-color: #dc2626;
-    --primary-text-color: #f5f5f5;
-    --secondary-text-color: #9ca3af;
+    --primary-text-color: #ffffff;
+    --secondary-text-color: #d1d5db;
     --white-color: #0f0f0f;
     --light-gray-color: #2d2d2d;
     --mid-gray-color: #374151;
-    --dark-gray-color: #f5f5f5;
+    --dark-gray-color: #e5e7eb;
     --black-color: #ffffff;
-    --shadow-base: 0 0 10px rgba(0, 0, 0, 0.3);
-
-    /* Additional dark mode colors */
-    --bg-primary: #0f0f0f;
-    --bg-secondary: #1a1a1a;
-    --bg-tertiary: #2d2d2d;
-    --text-primary: #ffffff;
-    --text-secondary: #d1d5db;
-    --text-muted: #9ca3af;
-    --border-color: #374151;
-    --accent-red: #dc2626;
-}
-
-body.dark:not(.post-template):not(.page-template) {
-    background: var(--bg-primary);
-    background-image: none;
-}
-
-body.dark html {
-    background: var(--bg-primary) !important;
-    color: var(--text-primary) !important;
-}
-
-body.dark .gh-site {
-    background: var(--bg-primary) !important;
-    color: var(--text-primary) !important;
+    --shadow-base: 0 0 10px rgba(0, 0, 0, 0.5);
 }
