@@ -1,0 +1,187 @@
+<div id="auth-modal" class="auth-modal" style="display: none;">
+    <div class="auth-modal-overlay"></div>
+    <div class="auth-modal-content">
+        <div class="auth-modal-header">
+            <h2>Sign in</h2>
+            <button class="auth-modal-close" aria-label="Close">&times;</button>
+        </div>
+        <div class="auth-modal-body">
+            <p class="auth-modal-description">
+                Choose how you want to access the content. Takes 10 seconds.
+            </p>
+
+            <div class="auth-buttons">
+                <a href="https://login.marleymcbride.co/auth/google?inbound=ba051b68-706c-44ff-9db7-a3853640e0ab" class="auth-btn auth-btn-google auth-btn-primary">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/>
+                        <path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/>
+                        <path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/>
+                        <path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/>
+                    </svg>
+                    Login or Signup with Google
+                </a>
+
+                <a href="#/portal/signin" data-portal="signin" class="auth-btn auth-btn-email">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
+                    </svg>
+                    Sign in with Email
+                </a>
+
+                {{#unless @site.members_invite_only}}
+                <a href="#/portal/signup" data-portal="signup" class="auth-btn auth-btn-signup">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm5 11h-4v4h-2v-4H7v-2h4V7h2v4h4v2z"/>
+                    </svg>
+                    Become a paid subscriber
+                </a>
+                {{/unless}}
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+.auth-modal {
+    position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 9999;
+    display: flex; align-items: center; justify-content: center;
+}
+.auth-modal-overlay {
+    position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(0, 0, 0, 0.5); backdrop-filter: blur(4px);
+}
+.auth-modal-content {
+    position: relative; background: white; border-radius: 12px; width: 90%;
+    max-width: 480px; max-height: 90vh; overflow-y: auto;
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+}
+.auth-modal-header {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 24px 24px 0; border-bottom: 1px solid #f3f4f6; margin-bottom: 24px;
+}
+.auth-modal-header h2 { margin: 0; font-size: 1.5rem; font-weight: 600; color: #111827; }
+.auth-modal-close {
+    background: none; border: none; font-size: 24px; cursor: pointer; color: #6b7280;
+    padding: 0; width: 32px; height: 32px; display: flex; align-items: center;
+    justify-content: center; border-radius: 6px; transition: all 0.2s ease;
+}
+.auth-modal-close:hover { background-color: #f3f4f6; color: #111827; }
+.auth-modal-body { padding: 0 24px 24px; }
+.auth-modal-description { color: #6b7280; margin-bottom: 24px; line-height: 1.6; }
+.auth-buttons { display: flex; flex-direction: column; gap: 12px; }
+.auth-btn {
+    display: flex; align-items: center; justify-content: center; gap: 12px;
+    padding: 12px 16px; border: 1px solid #d1d5db; border-radius: 8px;
+    background-color: #f9fafb; color: #374151; text-decoration: none;
+    font-weight: 500; font-size: 14px; transition: all 0.2s ease; cursor: pointer;
+}
+.auth-btn:hover {
+    background-color: #f3f4f6; border-color: #9ca3af; color: #111827;
+    text-decoration: none; transform: translateY(-1px);
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+.auth-btn svg { flex-shrink: 0; }
+.auth-btn-primary {
+    background-color: #4285F4; border-color: #4285F4; color: white;
+    font-weight: 600; box-shadow: 0 2px 4px -1px rgba(66, 133, 244, 0.3);
+}
+.auth-btn-primary:hover {
+    background-color: #3367D6; border-color: #3367D6; color: white;
+    transform: translateY(-2px); box-shadow: 0 6px 12px -1px rgba(66, 133, 244, 0.4);
+}
+.auth-btn-google:hover { background-color: #fef7f7; border-color: #fca5a5; }
+.auth-btn-email:hover { background-color: #f0f9ff; border-color: #93c5fd; }
+.auth-btn-signup { background-color: #f9fafb; border-color: #d1d5db; color: #374151; }
+.auth-btn-signup:hover { background-color: #f3f4f6; border-color: #9ca3af; color: #111827; }
+.auth-modal-trigger { cursor: pointer; transition: all 0.2s ease; }
+.auth-modal-trigger:hover { transform: translateY(-1px); box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1); }
+@media (max-width: 640px) {
+    .auth-modal-content { width: 95%; margin: 20px; }
+    .auth-modal-header, .auth-modal-body { padding-left: 20px; padding-right: 20px; }
+    .auth-btn { padding: 14px 16px; font-size: 15px; }
+}
+</style>
+
+<script>
+(function() {
+    function initAuthModal() {
+        const modal = document.getElementById('auth-modal');
+        const trigger = document.querySelector('.auth-modal-trigger');
+        const closeBtn = document.querySelector('.auth-modal-close');
+        const overlay = document.querySelector('.auth-modal-overlay');
+
+        if (!modal || !trigger) {
+            console.log('Auth modal elements not found');
+            return;
+        }
+
+        function openModal() {
+            modal.style.display = 'flex';
+            document.body.style.overflow = 'hidden';
+            setTimeout(() => {
+                const firstButton = modal.querySelector('.auth-btn');
+                if (firstButton) firstButton.focus();
+            }, 100);
+        }
+
+        function closeModal() {
+            modal.style.display = 'none';
+            document.body.style.overflow = '';
+            trigger.focus();
+        }
+
+        trigger.addEventListener('click', function(e) {
+            e.preventDefault();
+            openModal();
+        });
+
+        if (closeBtn) {
+            closeBtn.addEventListener('click', closeModal);
+        }
+
+        if (overlay) {
+            overlay.addEventListener('click', closeModal);
+        }
+
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape' && modal.style.display === 'flex') {
+                closeModal();
+            }
+        });
+
+        const portalLinks = modal.querySelectorAll('[data-portal]');
+        portalLinks.forEach(link => {
+            link.addEventListener('click', function() {
+                closeModal();
+            });
+        });
+
+        // Intercept all Ghost portal buttons and redirect to our modal
+        function interceptPortalButtons() {
+            const portalButtons = document.querySelectorAll('[data-portal="signup"], [data-portal="signin"]');
+            portalButtons.forEach(button => {
+                if (!button.classList.contains('auth-modal-trigger')) {
+                    button.addEventListener('click', function(e) {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        openModal();
+                    });
+                }
+            });
+        }
+
+        // Run initially and on DOM changes (for dynamically added buttons)
+        interceptPortalButtons();
+        const observer = new MutationObserver(interceptPortalButtons);
+        observer.observe(document.body, { childList: true, subtree: true });
+
+        console.log('Auth modal initialized successfully');
+    }
+
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', initAuthModal);
+    } else {
+        initAuthModal();
+    }
+})();
+</script>
