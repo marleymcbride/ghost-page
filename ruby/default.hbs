@@ -67,13 +67,7 @@
         {{{body}}}
     </div>
 
-    <footer class="gh-foot{{#unless @site.secondary_navigation}} no-menu{{/unless}} gh-outer">
-        <div class="gh-foot-inner gh-inner">
-            <div class="footer-signup">
-                <div class="footer-brand">
-                    <h2 class="footer-initial">M</h2>
-                    <div class="footer-text">
-                        <h3>Ready to break the cycle?</h3>
+?</h3>
                         <p>Join 700+ guys who are done with feeling exhausted and ready to feel incredible naturally.</p>
                     </div>
                 </div>
@@ -103,6 +97,23 @@
 </div>
 
 {{> "auth-modal"}}
+
+<script>
+function signupFooter() {
+    const email = document.getElementById('footer-email').value;
+    if (!email) {
+        alert('Please enter your email address');
+        return;
+    }
+
+    // Open the auth modal for footer signup
+    const modal = document.getElementById('auth-modal');
+    if (modal) {
+        modal.style.display = 'flex';
+        document.body.style.overflow = 'hidden';
+    }
+}
+</script>
 
 {{#is "post, page"}}
     {{> "pswp"}}
