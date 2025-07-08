@@ -225,6 +225,42 @@
     gap: 50px;
 }
 
+/* Dark Mode Post Visibility Fixes */
+body.dark .post-title,
+body.dark .post-title a {
+    color: var(--text-primary) !important;
+    opacity: 1 !important;
+}
+
+body.dark .post-excerpt {
+    color: var(--text-secondary) !important;
+    opacity: 1 !important;
+}
+
+body.dark .post-more {
+    color: var(--accent-red) !important;
+    opacity: 1 !important;
+    font-weight: 600;
+}
+
+body.dark .post-tag {
+    color: var(--text-primary) !important;
+    opacity: 1 !important;
+}
+
+/* General Post Card Styling */
+.post-link {
+    display: block;
+    text-decoration: none;
+    color: inherit;
+    transition: all 0.3s ease;
+}
+
+.post-link:hover {
+    text-decoration: none;
+    transform: translateY(-4px);
+}
+
 /* No Posts Fallback */
 .no-posts {
     text-align: center;

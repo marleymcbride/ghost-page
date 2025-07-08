@@ -224,7 +224,15 @@
 
                 const shouldIntercept = triggerWords.some(word => allText.includes(word));
 
-                if (shouldIntercept && !btn.classList.contains('auth-modal-trigger')) {
+                // Exclude post links from interception
+                const isPostLink = btn.closest('.post-link') ||
+                                  btn.closest('article') ||
+                                  btn.href?.includes('/posts/') ||
+                                  btn.classList.contains('post-more') ||
+                                  btn.classList.contains('read-more') ||
+                                  btn.classList.contains('featured-read');
+
+                if (shouldIntercept && !btn.classList.contains('auth-modal-trigger') && !isPostLink) {
                     btn.removeEventListener('click', interceptClick);
                     btn.addEventListener('click', interceptClick);
                     btn.setAttribute('data-intercepted', 'true');

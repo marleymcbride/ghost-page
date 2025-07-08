@@ -6,19 +6,18 @@
         <div class="gh-inner">
             <div class="hero-content">
                 <h1 class="hero-title">
-                    Stop feeling like shit every morning.<br>
-                    <span class="hero-accent">Here's how to fix it.</span>
+                    "Wake Up Energized. Train Less. Live The Natty Sweet Spot."<br>
+                    <span class="hero-accent">Build the body of your dreams.</span>
                 </h1>
                 <p class="hero-subtitle">
-                    Break free from caffeine and alcohol. Build the body you actually want. Feel incredible all day without any substances.
+                    Join 700+ high-performers getting weekly insights on natural health, performance and energy optimization, plus instant access to my complete 3-week energy transformation system.
                 </p>
-
                 <div class="hero-cta">
                     <div class="email-signup">
                         <input type="email" placeholder="Enter your email" class="email-input" id="hero-email">
                         <button class="cta-button" onclick="signupHero()">Get Started Free</button>
                     </div>
-                    <p class="cta-subtext">Join 700+ high-performers who broke the cycle</p>
+                    <p class="cta-subtext">New guide every week. Unsubscribe anytime.</p>
                 </div>
             </div>
         </div>
@@ -28,38 +27,29 @@
     <section class="content-section">
         <div class="gh-inner">
             <div class="section-header">
-                <h2>Featured Posts</h2>
-                <p class="section-subtitle">My best stuff - start here</p>
+                <h2>START HERE</h2>
             </div>
 
-            <div class="content-grid">
-                {{#get "posts" limit="3" as |recent_posts|}}
-                    {{#foreach recent_posts}}
-                        <article class="content-card">
-                            {{#if feature_image}}
-                                <div class="content-image">
-                                    <img src="{{feature_image}}" alt="{{title}}">
-                                    {{#primary_tag}}
-                                        <span class="content-tag">{{name}}</span>
-                                    {{/primary_tag}}
-                                </div>
-                            {{/if}}
+            <div class="featured-post-home">
+                <article class="featured-post-card">
+                    <div class="featured-image-home">
+                        <a href="https://marleymcbride.co/posts/the-natty-sweet-spot/">
+                            <img src="https://marleymcbride.co/content/images/2025/01/the-natty-sweet-spot.jpg" alt="The Natty Sweet Spot">
+                        </a>
+                        <span class="featured-tag-home">HEALTH</span>
+                    </div>
 
-                            <div class="content-text">
-                                <h3><a href="{{url}}">{{title}}</a></h3>
-                                <p>{{excerpt}}</p>
-                                <div class="content-meta">
-                                    <span class="read-time">{{reading_time}}</span>
-                                    <a href="{{url}}" class="read-more">Read Guide →</a>
-                                </div>
-                            </div>
-                        </article>
-                    {{/foreach}}
-                {{/get}}
-            </div>
-
-            <div class="cta-center">
-                <a href="/posts" class="secondary-cta">View All Guides</a>
+                    <div class="featured-content-home">
+                        <h3 class="featured-title-home">
+                            <a href="https://marleymcbride.co/posts/the-natty-sweet-spot/">The Natty Sweet Spot (Full Guide)</a>
+                        </h3>
+                        <p class="featured-excerpt-home">Welcome to The Full Guide to The Natty Sweet Spot. This is your optimal natural male physique at 11-14% body fat where performance, aesthetics, and health converge without extreme measures.</p>
+                        <div class="featured-meta-home">
+                            <span class="reading-time">12 min read</span>
+                            <a href="https://marleymcbride.co/posts/the-natty-sweet-spot/" class="featured-read-home">Read Full Guide →</a>
+                        </div>
+                    </div>
+                </article>
             </div>
         </div>
     </section>
@@ -285,13 +275,14 @@
 }
 
 .hero-subtitle {
-    font-size: 2rem !important;
+    font-size: 1.6rem !important;
     line-height: 1.5;
     color: var(--text-secondary) !important;
     margin-bottom: 60px;
     max-width: 800px;
     margin-left: auto;
     margin-right: auto;
+    font-weight: 400;
 }
 
 .email-signup {
@@ -560,6 +551,105 @@
 .content-section {
     padding: 140px 0;
     background: var(--bg-secondary) !important;
+}
+
+/* Featured Post Home */
+.featured-post-home {
+    margin-bottom: 80px;
+}
+
+.featured-post-card {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    align-items: center;
+    background: var(--bg-tertiary) !important;
+    border: 1px solid var(--border-color);
+    border-radius: 16px;
+    overflow: hidden;
+    padding: 40px;
+    transition: all 0.3s ease;
+}
+
+.featured-post-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+}
+
+.featured-image-home {
+    position: relative;
+    border-radius: 12px;
+    overflow: hidden;
+    aspect-ratio: 16/10;
+}
+
+.featured-image-home img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+.featured-image-home:hover img {
+    transform: scale(1.05);
+}
+
+.featured-tag-home {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    background: var(--accent-red) !important;
+    color: white !important;
+    padding: 8px 16px;
+    border-radius: 6px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    text-transform: uppercase;
+}
+
+.featured-title-home {
+    font-size: 2.4rem !important;
+    font-weight: 700;
+    line-height: 1.2;
+    margin-bottom: 20px;
+}
+
+.featured-title-home a {
+    color: var(--text-primary) !important;
+    text-decoration: none;
+}
+
+.featured-title-home a:hover {
+    color: var(--accent-red) !important;
+}
+
+.featured-excerpt-home {
+    font-size: 1.2rem !important;
+    line-height: 1.6;
+    color: var(--text-secondary) !important;
+    margin-bottom: 24px;
+}
+
+.featured-meta-home {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    font-size: 1rem;
+}
+
+.featured-meta-home .reading-time {
+    color: var(--text-muted) !important;
+}
+
+.featured-read-home {
+    color: var(--accent-red) !important;
+    text-decoration: none;
+    font-weight: 600;
+    margin-left: auto;
+}
+
+.featured-read-home:hover {
+    color: #b91c1c !important;
 }
 
 .content-grid {
@@ -888,6 +978,7 @@
     .signup-content { grid-template-columns: 1fr; gap: 60px; }
     .signup-brand { flex-direction: column; align-items: center; text-align: center; }
     .email-signup-bottom { flex-direction: column; }
+    .featured-post-card { grid-template-columns: 1fr; gap: 30px; }
 }
 </style>
 
