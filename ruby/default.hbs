@@ -5,7 +5,8 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>{{meta_title}}</title>
-    <link rel="stylesheet" href="{{asset "built/screen.css"}}">
+    <link rel="stylesheet" href="{{asset "built/screen.css"}}?v=2024-footer-fixed">
+    <!-- FOOTER FIXED: v2024-complete -->
 
     {{ghost_head}}
 </head>
@@ -33,7 +34,7 @@
                 <a class="nav-link {{#is "home"}}nav-current{{/is}}" href="{{@site.url}}">Home</a>
                 <a class="nav-link {{#is "index"}}nav-current{{/is}}" href="{{@site.url}}/posts">Blog</a>
                 <a class="nav-link" href="/anti-stack">Anti-Stack</a>
-                <a class="nav-link" href="/limitless-protocol">LIMITLESS</a>
+                <a class="nav-link" href="/limitless-protocol">Limitless Protocol</a>
                 {{#unless @site.members_enabled}}
                     {{#match @custom.navigation_layout "Stacked"}}
                         {{> "darkmode"}}<button class="gh-search gh-icon-btn" aria-label="Search this site" data-ghost-search>{{> "icons/search"}}</button>
@@ -77,8 +78,8 @@
                     </div>
                 </div>
 
-                <div class="footer-form">
-                    <div class="email-signup-footer">
+                <div class="footer-right">
+                    <div class="footer-form">
                         <input type="email" placeholder="enter email address" class="email-input-footer" id="footer-email">
                         <button class="signup-button-footer" onclick="signupFooter()">Subscribe</button>
                     </div>

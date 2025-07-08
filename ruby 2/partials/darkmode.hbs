@@ -1,0 +1,91 @@
+<div>
+  <input type="checkbox" class="dm-checkbox" id="dm-checkbox">
+  <label for="dm-checkbox" class="dm-checkbox-label">
+    <ico>🌙</ico>
+    <ico>☀️</ico>
+    <span class="ball"></span>
+  </label>
+</div>
+
+<style>
+.dm-checkbox {
+    opacity: 0;
+    position: absolute;
+    width: fit-content;
+}
+
+.dm-checkbox-label {
+    background-color: var(--light-gray-color);
+    width: 50px;
+    height: 26px;
+    border-radius: 50px;
+    position: relative;
+    padding: 5px;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.home-template .dm-checkbox-label {
+    background-color: #1a1a1a;
+}
+
+.dm-checkbox-label .ball {
+    background-color: #fff;
+    width: 22px;
+    height: 22px;
+    position: absolute;
+    left: 2px;
+    top: 2px;
+    border-radius: 50%;
+    transition: transform 0.3s linear;
+}
+
+.dm-checkbox:checked + .dm-checkbox-label .ball {
+    transform: translateX(24px);
+}
+</style>
+
+<script>
+const checkbox = document.getElementById("dm-checkbox")
+checkbox.addEventListener("change", () => {
+  document.body.classList.toggle("dark")
+  document.cookie = `darkmode-prefered=${checkbox.checked};path=/`
+})
+
+function getCookie(cname) {
+  let name = cname + "=";
+  let decodedCookie = decodeURIComponent(document.cookie);
+  let ca = decodedCookie.split(';');
+  for(let i = 0; i <ca.length; i++) {
+    let c = ca[i];
+    while (c.charAt(0) == ' ') {
+      c = c.substring(1);
+    }
+    if (c.indexOf(name) == 0) {
+      return c.substring(name.length, c.length);
+    }
+  }
+  return "none";
+}
+
+function checkCookie() {
+  let preference = getCookie("darkmode-prefered");
+  if (preference != "none") {
+    if (preference == "true") {
+        checkbox.checked = true;
+        document.body.classList.add("dark")
+        } else {
+        checkbox.checked = false;
+        document.body.classList.remove("dark")
+        }
+  } else {
+    // Default to dark mode instead of system preference
+    checkbox.checked = true;
+    document.body.classList.add("dark")
+    document.cookie = `darkmode-prefered=true;path=/`
+  }
+}
+checkCookie()
+</script>
