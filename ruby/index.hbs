@@ -4,8 +4,8 @@
     {{!-- Blog Header --}}
     <header class="blog-header gh-outer">
         <div class="gh-inner">
-            <h1 class="blog-title">Elite Health Guides</h1>
-            <p class="blog-subtitle">No-bullshit content for high-performers who want to optimize their body and mind</p>
+            <h1 class="blog-title">All Guides</h1>
+            <p class="blog-subtitle">No-bullshit content for high-performers who want to feel incredible</p>
         </div>
     </header>
 
@@ -53,13 +53,23 @@
                 <h2>All Guides</h2>
             </div>
 
-            <div class="post-feed">
-                {{#foreach posts}}
-                    {{> "loop"}}
-                {{/foreach}}
-            </div>
+            {{#if posts}}
+                <div class="post-feed">
+                    {{#foreach posts}}
+                        {{!-- Filter out posts with #DontShowOnHome tag --}}
+                        {{^has tag="#DontShowOnHome"}}
+                            {{> "loop"}}
+                        {{/has}}
+                    {{/foreach}}
+                </div>
 
-            {{pagination}}
+                {{pagination}}
+            {{else}}
+                <div class="no-posts">
+                    <h3>No posts yet</h3>
+                    <p>Check back soon for content, or create some posts in your Ghost admin panel.</p>
+                </div>
+            {{/if}}
         </div>
     </main>
 </div>
@@ -213,6 +223,23 @@
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
     gap: 50px;
+}
+
+/* No Posts Fallback */
+.no-posts {
+    text-align: center;
+    padding: 80px 0;
+}
+
+.no-posts h3 {
+    font-size: 2rem !important;
+    color: var(--text-primary) !important;
+    margin-bottom: 16px;
+}
+
+.no-posts p {
+    font-size: 1.2rem !important;
+    color: var(--text-secondary) !important;
 }
 
 /* Responsive */

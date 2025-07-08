@@ -25,19 +25,18 @@
                         {{/if}}
                     </a>
                 </div>
-                {{> "darkmode"}}
                 <button class="gh-search gh-icon-btn" aria-label="Search this site" data-ghost-search>{{> "icons/search"}}</button>
                 <button class="gh-burger" aria-label="Toggle menu"></button>
             </div>
 
             <nav class="gh-head-menu">
                 <a class="nav-link {{#is "home"}}nav-current{{/is}}" href="{{@site.url}}">Home</a>
-                <a class="nav-link {{#is "index"}}nav-current{{/is}}" href="/blog">Blog</a>
+                <a class="nav-link {{#is "index"}}nav-current{{/is}}" href="{{@site.url}}/posts">Blog</a>
                 <a class="nav-link" href="/anti-stack">Anti-Stack</a>
                 <a class="nav-link" href="/limitless-protocol">Limitless Protocol</a>
                 {{#unless @site.members_enabled}}
                     {{#match @custom.navigation_layout "Stacked"}}
-                        <button class="gh-search gh-icon-btn" aria-label="Search this site" data-ghost-search>{{> "icons/search"}}</button>
+                        {{> "darkmode"}}<button class="gh-search gh-icon-btn" aria-label="Search this site" data-ghost-search>{{> "icons/search"}}</button>
                     {{/match}}
                 {{/unless}}
             </nav>
@@ -45,10 +44,10 @@
             <div class="gh-head-actions">
                 {{#unless @site.members_enabled}}
                     {{^match @custom.navigation_layout "Stacked"}}
-                        <button class="gh-search gh-icon-btn" aria-label="Search this site" data-ghost-search>{{> "icons/search"}}</button>
+                        {{> "darkmode"}}<button class="gh-search gh-icon-btn" aria-label="Search this site" data-ghost-search>{{> "icons/search"}}</button>
                     {{/match}}
                 {{else}}
-                    <button class="gh-search gh-icon-btn" aria-label="Search this site" data-ghost-search>{{> "icons/search"}}</button>
+                    {{> "darkmode"}}<button class="gh-search gh-icon-btn" aria-label="Search this site" data-ghost-search>{{> "icons/search"}}</button>
                     <div class="gh-head-members">
                         {{#unless @member}}
                             <button class="gh-head-btn gh-btn gh-primary-btn auth-modal-trigger" type="button">
@@ -72,11 +71,9 @@
             <div class="gh-copyright">
                 {{@site.title}} © {{date format="YYYY"}}
             </div>
-            {{#if @site.secondary_navigation}}
-                <nav class="gh-foot-menu">
-                    {{navigation type="secondary"}}
-                </nav>
-            {{/if}}
+            <nav class="gh-foot-menu">
+                <a href="/privacy-policy">Privacy Policy</a>
+            </nav>
             <div class="gh-powered-by">
                 <a href="https://ghost.org/" target="_blank" rel="noopener">Powered by Ghost</a>
             </div>

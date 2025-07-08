@@ -5,4 +5,7 @@ name = "ghost-theme-development"
 description = "Ghost theme customization for login system"
 
 [commands]
-# Add any specific commands if needed later
+# Git commands for file tracking
+add = ["git", "add"]
+status = ["git", "status"]
+commit = ["git", "commit", "-m"]
