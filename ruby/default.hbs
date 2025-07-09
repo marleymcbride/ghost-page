@@ -34,7 +34,8 @@
                 <a class="nav-link {{#is "home"}}nav-current{{/is}}" href="{{@site.url}}">Home</a>
                 <a class="nav-link {{#is "index"}}nav-current{{/is}}" href="{{@site.url}}/posts">Blog</a>
                 <a class="nav-link" href="/anti-stack">Anti-Stack</a>
-                <a class="nav-link" href="/limitless-protocol">Limitless Protocol</a>
+                <a class="nav-link" href="/limitless-protocol">Limitless</a>
+                <a class="nav-link" href="/about">More</a>
                 {{#unless @site.members_enabled}}
                     {{#match @custom.navigation_layout "Stacked"}}
                         {{> "darkmode"}}<button class="gh-search gh-icon-btn" aria-label="Search this site" data-ghost-search>{{> "icons/search"}}</button>
@@ -68,37 +69,55 @@
     </div>
 
     <footer class="gh-foot gh-outer">
-        <div class="gh-foot-inner">
-            <div class="footer-signup">
-                <div class="footer-brand">
-                    <div class="footer-initial">M</div>
-                    <div class="footer-text">
-                        <h3>Ready to break the cycle?</h3>
-                        <p>Join 700+ guys who are done with feeling exhausted and ready to feel incredible naturally.</p>
-                    </div>
-                </div>
+  <div class="gh-foot-inner">
 
-                <div class="footer-form-container">
-                    <div class="footer-form">
-                        <input type="email" placeholder="enter email address" class="email-input-footer" id="footer-email">
-                        <button class="signup-button-footer" onclick="signupFooter()">Subscribe</button>
-                    </div>
-                </div>
-            </div>
-
-            <div class="footer-meta">
-                <div class="gh-copyright">
-                    {{@site.title}} © {{date format="YYYY"}}
-                </div>
-                <nav class="gh-foot-menu">
-                    <a href="/privacy-policy">Privacy Policy</a>
-                </nav>
-                <div class="gh-powered-by">
-                    <a href="https://ghost.org/" target="_blank" rel="noopener">Powered by Ghost</a>
-                </div>
-            </div>
+    {{!-- 50/50 flex container --}}
+    <div class="footer-signup">
+      {{!-- LEFT 50%: “M” + text --}}
+      <div class="footer-signup-text">
+        <div class="footer-text">
+          <h3>Ready to break the cycle?</h3>
+          <p>Join 700+ guys who are done with feeling exhausted</p>
+          <p>and ready to feel incredible naturally.</p>
         </div>
-    </footer>
+      </div>
+
+      {{!-- RIGHT 50%: email form --}}
+      <div class="footer-signup-form">
+        <div class="footer-form-container">
+          <div class="footer-form">
+            <input
+              type="email"
+              placeholder="enter email address"
+              class="email-input-footer"
+              id="footer-email"
+            >
+            <button
+              class="signup-button-footer"
+              onclick="signupFooter()"
+            >Subscribe</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    {{!-- BELOW: meta bar --}}
+    <div class="footer-meta">
+      <div class="gh-copyright">
+        {{@site.title}} © {{date format="YYYY"}}
+      </div>
+      <nav class="gh-foot-menu">
+        <a href="/privacy-policy">Privacy Policy</a>
+      </nav>
+      <div class="gh-powered-by">
+        <a href="https://ghost.org/" target="_blank" rel="noopener">
+          Powered by Ghost
+        </a>
+      </div>
+    </div>
+
+  </div>
+</footer>
 
 </div>
 
