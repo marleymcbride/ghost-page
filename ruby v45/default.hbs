@@ -125,6 +125,48 @@
 {{> "auth-modal"}}
 
 <script>
+function signupFooter() {
+    try {
+        const emailInput = document.getElementById('footer-email');
+        const email = emailInput ? emailInput.value.trim() : '';
+
+        // Enhanced email validation
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+        if (!email) {
+            alert('Please enter your email address');
+            if (emailInput) emailInput.focus();
+            return;
+        }
+
+        if (!emailRegex.test(email)) {
+            alert('Please enter a valid email address');
+            if (emailInput) emailInput.focus();
+            return;
+        }
+
+        // Open the auth modal for footer signup
+        const modal = document.getElementById('auth-modal');
+        if (modal) {
+            modal.style.display = 'flex';
+            document.body.style.overflow = 'hidden';
+
+            // Focus first button after modal opens
+            setTimeout(() => {
+                const firstButton = modal.querySelector('.auth-btn');
+                if (firstButton) firstButton.focus();
+            }, 100);
+        } else {
+            console.warn('Auth modal not found');
+            // Fallback: redirect to signup page
+            window.location.href = '#/portal/signup';
+        }
+    } catch (error) {
+        console.error('Footer signup error:', error);
+        alert('Something went wrong. Please try again.');
+    }
+}
+
 // Close mobile menu when login button is clicked
 document.addEventListener('DOMContentLoaded', function() {
     try {
@@ -298,47 +340,13 @@ async function submitToN8nWebhookDirect(endpoint, email, firstName = '', source 
         statusText: response.statusText
     });
 
-    // Parse JSON response regardless of HTTP status
-    let result;
-    try {
-        result = await response.json();
-        console.log(`📄 WEBHOOK DEBUG: Parsed JSON response:`, result);
-    } catch (parseError) {
-        console.error(`❌ WEBHOOK DEBUG: Failed to parse JSON response:`, parseError);
-        throw new Error(`Invalid response format from webhook endpoint`);
-    }
-
-    // Check if webhook returned success: false
-    if (!result.success) {
-        console.error(`❌ WEBHOOK DEBUG: Webhook returned error:`, result);
-
-        // Map specific error types to user-friendly messages
-        let userMessage = 'Something went wrong. Please try again.'; // Default fallback
-
-        if (result.error === 'Invalid Email') {
-            userMessage = 'Please enter a valid email address';
-        } else if (result.error === 'Invalid data format') {
-            userMessage = 'Please fill in all required fields';
-        } else if (result.message) {
-            // Use the message from the webhook if available
-            userMessage = result.message;
-        }
-
-        // Create a structured error that our error handler can process
-        const webhookError = new Error(userMessage);
-        webhookError.webhookError = true;
-        webhookError.errorType = result.error;
-        webhookError.originalResponse = result;
-        throw webhookError;
-    }
-
-    // Handle HTTP errors (network issues, 404, 500, etc.)
     if (!response.ok) {
-        const errorText = result.message || response.statusText;
-        console.error(`❌ WEBHOOK DEBUG: HTTP error from ${endpoint}:`, errorText);
-        throw new Error(`HTTP ${response.status}: ${errorText}`);
+        const errorText = await response.text();
+        console.error(`❌ WEBHOOK DEBUG: Error response from ${endpoint}:`, errorText);
+        throw new Error(`HTTP ${response.status}: ${response.statusText} - ${errorText}`);
     }
 
+    const result = await response.json();
     console.log(`✅ WEBHOOK DEBUG: Success response from ${endpoint}:`, result);
     return result;
 }
@@ -435,16 +443,11 @@ async function submitToN8nWebhook(email, firstName = '', source = 'unknown', but
             stack: error.stack
         });
 
-        // Enhanced error handling with webhook-specific messages
-        let errorMessage = 'Something went wrong. Please try again.';
+        // Enhanced error handling with specific debugging
+        let errorMessage = 'Webhook failed. Please try again.';
         let debugInfo = '';
 
-        // Check if this is a structured webhook error first
-        if (error.webhookError) {
-            console.log('🎯 WEBHOOK DEBUG: Structured webhook error detected:', error);
-            errorMessage = error.message; // Use the specific message from webhook
-            debugInfo = `Webhook error: ${error.errorType || 'Unknown'}`;
-        } else if (error.name === 'TypeError' && error.message.includes('fetch')) {
+        if (error.name === 'TypeError' && error.message.includes('fetch')) {
             errorMessage = 'Connection failed - please check your internet connection.';
             debugInfo = 'Network/CORS error';
         } else if (error.message.includes('404')) {
@@ -465,13 +468,7 @@ async function submitToN8nWebhook(email, firstName = '', source = 'unknown', but
         }
 
         console.error(`🔧 WEBHOOK DEBUG: Error category: ${debugInfo}`);
-
-        // For webhook errors, show clean user message without debug info
-        if (error.webhookError) {
-            showNotification(errorMessage, 'error');
-        } else {
-            showNotification(`${errorMessage} (Debug: ${debugInfo})`, 'error');
-        }
+        showNotification(`${errorMessage} (Debug: ${debugInfo})`, 'error');
         throw error;
     } finally {
         // Always remove loading state

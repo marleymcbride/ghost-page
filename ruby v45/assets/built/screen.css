@@ -129,11 +129,11 @@ body.dark .gh-head-btn{color:#ffffff!important}
 
 .footer-text p{font-size:1.8rem;color:#d1d5db;line-height:1.5;margin:0;max-width:450px}
 
-.footer-form-container{display:flex;justify-content:flex-end;max-width:100%;overflow:hidden}
+.footer-form-container{display:flex;justify-content:flex-end}
 
-.footer-form{display:flex;gap:20px;max-width:600px;width:100%}
+.footer-form{display:flex;gap:20px;width:100%}
 
-.email-input-footer{flex:1;padding:20px 24px;border:1px solid rgba(255,255,255,0.2);border-radius:12px;font-size:1.6rem;background:rgba(255,255,255,0.05);color:#ffffff;backdrop-filter:blur(10px);min-width:280px;max-width:100%}
+.email-input-footer{flex:1;padding:20px 24px;border:1px solid rgba(255,255,255,0.2);border-radius:12px;font-size:1.6rem;background:rgba(255,255,255,0.05);color:#ffffff;backdrop-filter:blur(10px);min-width:450px}
 
 .email-input-footer::placeholder{color:#9ca3af}
 
