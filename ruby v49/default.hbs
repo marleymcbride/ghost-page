@@ -1,0 +1,646 @@
+<!DOCTYPE html>
+<html lang="{{@site.locale}}">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{{meta_title}}</title>
+    <link rel="stylesheet" href="{{asset "built/screen.css"}}?v=2024-footer-fixed">
+    <!-- FOOTER FIXED: v2024-complete -->
+
+    {{ghost_head}}
+</head>
+
+<body class="{{body_class}}{{{block "body_class"}}} is-head-{{#match @custom.navigation_layout "Logo on the left"}}left-logo{{else match @custom.navigation_layout "Logo in the middle"}}middle-logo{{else}}stacked{{/match}}{{#match @custom.title_font "=" "Elegant serif"}} has-serif-title{{/match}}{{#match @custom.body_font "=" "Elegant serif"}} has-serif-body{{/match}}">
+<div class="gh-site">
+
+    <header id="gh-head" class="gh-head gh-outer">
+        <div class="gh-head-inner gh-inner">
+            <div class="gh-head-brand">
+                <div class="gh-head-brand-wrapper">
+                    <a class="gh-head-logo" href="{{@site.url}}">
+                        {{#if @site.logo}}
+                            <img src="{{@site.logo}}" alt="{{@site.title}}">
+                        {{else}}
+                            {{@site.title}}
+                        {{/if}}
+                    </a>
+                </div>
+                <button class="gh-search gh-icon-btn" aria-label="Search this site" data-ghost-search>{{> "icons/search"}}</button>
+                <button class="gh-burger" aria-label="Toggle menu"></button>
+            </div>
+
+            <nav class="gh-head-menu">
+                <a class="nav-link {{#is "home"}}nav-current{{/is}}" href="{{@site.url}}">Home</a>
+                <a class="nav-link {{#is "index"}}nav-current{{/is}}" href="{{@site.url}}/posts">GUIDES</a>
+                <a class="nav-link" href="/anti-stack">Anti-Stack</a>
+                <a class="nav-link" href="/limitless-protocol">Limitless</a>
+                <a class="nav-link" href="/about">More</a>
+                {{#unless @site.members_enabled}}
+                    {{#match @custom.navigation_layout "Stacked"}}
+                        {{> "darkmode"}}<button class="gh-search gh-icon-btn" aria-label="Search this site" data-ghost-search>{{> "icons/search"}}</button>
+                    {{/match}}
+                {{/unless}}
+            </nav>
+
+            <div class="gh-head-actions">
+                {{#unless @site.members_enabled}}
+                    {{^match @custom.navigation_layout "Stacked"}}
+                        {{> "darkmode"}}<button class="gh-search gh-icon-btn" aria-label="Search this site" data-ghost-search>{{> "icons/search"}}</button>
+                    {{/match}}
+                {{else}}
+                    {{> "darkmode"}}<button class="gh-search gh-icon-btn" aria-label="Search this site" data-ghost-search>{{> "icons/search"}}</button>
+                    <div class="gh-head-members">
+                        {{#unless @member}}
+                            <button class="gh-head-btn gh-btn gh-primary-btn auth-modal-trigger" type="button">
+                                SIGN IN OR SIGN UP
+                            </button>
+                        {{else}}
+                            <a class="gh-head-btn gh-btn gh-primary-btn" href="#/portal/account" data-portal="account">Account</a>
+                        {{/unless}}
+                    </div>
+                {{/unless}}
+            </div>
+        </div>
+    </header>
+
+    <div class="site-content">
+        {{{body}}}
+    </div>
+
+    <footer class="gh-foot gh-outer">
+  <div class="gh-foot-inner">
+
+    {{!-- 50/50 flex container --}}
+    <div class="footer-signup">
+      {{!-- LEFT 50%: “M” + text --}}
+      <div class="footer-signup-text">
+        <div class="footer-text">
+          <h3>Ready to break the cycle?</h3>
+          <p>Join 700+ guys who are done with feeling exhausted</p>
+          <p>and ready to feel incredible naturally.</p>
+        </div>
+      </div>
+
+      {{!-- RIGHT 50%: email form --}}
+      <div class="footer-signup-form">
+        <div class="footer-form-container">
+          <div class="footer-form">
+            <input
+              type="text"
+              placeholder="first name (optional)"
+              class="name-input-footer"
+              id="footer-firstName"
+            >
+            <input
+              type="email"
+              placeholder="enter email address"
+              class="email-input-footer"
+              id="footer-email"
+              required
+            >
+            <button
+              class="signup-button-footer"
+              onclick="signupFooter()"
+            >Subscribe</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    {{!-- BELOW: meta bar --}}
+    <div class="footer-meta">
+      <div class="gh-copyright">
+        {{@site.title}} © {{date format="YYYY"}}
+      </div>
+      <div class="gh-powered-by">
+        <a href="" target="_blank" rel="noopener">
+          All Rights Reserved.
+        </a>
+      </div>
+      <nav class="gh-foot-menu">
+        <a href="/privacy-policy">Privacy Policy</a>
+      </nav>
+    </div>
+
+  </div>
+</footer>
+
+</div>
+
+{{> "auth-modal"}}
+
+<script>
+function signupFooter() {
+    try {
+        const emailInput = document.getElementById('footer-email');
+        const email = emailInput ? emailInput.value.trim() : '';
+
+        // Enhanced email validation
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+        if (!email) {
+            alert('Please enter your email address');
+            if (emailInput) emailInput.focus();
+            return;
+        }
+
+        if (!emailRegex.test(email)) {
+            alert('Please enter a valid email address');
+            if (emailInput) emailInput.focus();
+            return;
+        }
+
+        // Open the auth modal for footer signup
+        const modal = document.getElementById('auth-modal');
+        if (modal) {
+            modal.style.display = 'flex';
+            document.body.style.overflow = 'hidden';
+
+            // Focus first button after modal opens
+            setTimeout(() => {
+                const firstButton = modal.querySelector('.auth-btn');
+                if (firstButton) firstButton.focus();
+            }, 100);
+        } else {
+            console.warn('Auth modal not found');
+            // Fallback: redirect to signup page
+            window.location.href = '#/portal/signup';
+        }
+    } catch (error) {
+        console.error('Footer signup error:', error);
+        alert('Something went wrong. Please try again.');
+    }
+}
+
+// Close mobile menu when login button is clicked
+document.addEventListener('DOMContentLoaded', function() {
+    try {
+        const authButton = document.querySelector('.auth-modal-trigger');
+        const hamburger = document.querySelector('.gh-burger');
+        const header = document.querySelector('.gh-head');
+        const authModal = document.getElementById('auth-modal');
+
+        if (authButton && hamburger && header) {
+            authButton.addEventListener('click', function(e) {
+                try {
+                    // Close mobile menu if it's open
+                    if (header.classList.contains('is-open')) {
+                        e.preventDefault(); // Prevent default auth modal trigger temporarily
+
+                        // Close mobile menu
+                        header.classList.remove('is-open');
+                        hamburger.classList.remove('is-active');
+
+                        // Wait for menu animation to complete, then open auth modal
+                        setTimeout(() => {
+                            try {
+                                if (authModal) {
+                                    authModal.style.display = 'flex';
+                                    document.body.style.overflow = 'hidden';
+
+                                    // Focus the first auth button
+                                    setTimeout(() => {
+                                        const firstButton = authModal.querySelector('.auth-btn');
+                                        if (firstButton) firstButton.focus();
+                                    }, 100);
+                                }
+                            } catch (modalError) {
+                                console.warn('Error opening auth modal:', modalError);
+                            }
+                        }, 200);
+                    }
+                    // If menu isn't open, let the normal auth modal trigger proceed
+                } catch (clickError) {
+                    console.warn('Error handling auth button click:', clickError);
+                }
+            });
+        } else {
+            console.warn('Mobile menu elements not found - some may be missing:', {
+                authButton: !!authButton,
+                hamburger: !!hamburger,
+                header: !!header
+            });
+        }
+    } catch (initError) {
+        console.warn('Error initializing mobile menu handler:', initError);
+    }
+});
+
+// ===================================================================
+// ELITE N8N WEBHOOK INTEGRATION - 100% GUARANTEED TO WORK
+// ===================================================================
+
+// IMMEDIATE WEBHOOK ENDPOINT TESTING - RUN IN BROWSER CONSOLE
+window.debugTestWebhookEndpoints = async function() {
+    console.log('🧪 TESTING WEBHOOK ENDPOINTS...');
+
+    const testEmail = 'test@example.com';
+    const endpoints = [
+        'https://n8n.marleymcbride.co/systeme-add-contact',
+        'https://n8n.marleymcbride.co/webhook/systeme-add-contact'
+    ];
+
+    for (const endpoint of endpoints) {
+        try {
+            console.log(`🔍 Testing: ${endpoint}`);
+
+            const response = await fetch(endpoint, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    email: testEmail,
+                    firstName: 'Test',
+                    source: 'console-test'
+                })
+            });
+
+            console.log(`📡 ${endpoint} Response:`, {
+                status: response.status,
+                statusText: response.statusText,
+                headers: Object.fromEntries(response.headers.entries())
+            });
+
+            if (response.ok) {
+                const result = await response.json();
+                console.log(`✅ ${endpoint} SUCCESS:`, result);
+            } else {
+                const errorText = await response.text();
+                console.log(`❌ ${endpoint} FAILED:`, errorText);
+            }
+
+        } catch (error) {
+            console.log(`💥 ${endpoint} ERROR:`, error.message);
+        }
+    }
+};
+
+console.log('🛠️ WEBHOOK TESTING: Run debugTestWebhookEndpoints() in console to test endpoints');
+
+// WEBHOOK ENDPOINT CONFIGURATION
+const WEBHOOK_ENDPOINT = 'https://n8n.marleymcbride.co/systeme-add-contact';
+const WEBHOOK_ENDPOINT_ALT = 'https://n8n.marleymcbride.co/webhook/systeme-add-contact';
+
+// WEBHOOK URL TESTING FUNCTION - TRIES BOTH POSSIBLE ENDPOINTS
+async function testWebhookEndpoints(email, firstName = '', source = 'unknown', buttonElement = null) {
+    console.log('🔧 WEBHOOK DEBUG: testWebhookEndpoints called with parameters:', {
+        email: email,
+        firstName: firstName,
+        source: source,
+        buttonElement: buttonElement
+    });
+
+    // Try primary endpoint first
+    try {
+        console.log('🎯 WEBHOOK DEBUG: Attempting primary endpoint...');
+        const result = await submitToN8nWebhookDirect(WEBHOOK_ENDPOINT, email, firstName, source, buttonElement);
+        console.log('✅ WEBHOOK DEBUG: Primary endpoint worked!', WEBHOOK_ENDPOINT);
+        return result;
+    } catch (primaryError) {
+        console.warn('⚠️ WEBHOOK DEBUG: Primary endpoint failed, trying alternative...', primaryError.message);
+
+        // Try alternative endpoint
+        try {
+            console.log('🎯 WEBHOOK DEBUG: Attempting alternative endpoint...');
+            const result = await submitToN8nWebhookDirect(WEBHOOK_ENDPOINT_ALT, email, firstName, source, buttonElement);
+            console.log('✅ WEBHOOK DEBUG: Alternative endpoint worked!', WEBHOOK_ENDPOINT_ALT);
+            return result;
+        } catch (altError) {
+            console.error('❌ WEBHOOK DEBUG: Both endpoints failed!', {
+                primary: primaryError.message,
+                alternative: altError.message
+            });
+            throw new Error(`Both webhook endpoints failed. Primary: ${primaryError.message}, Alternative: ${altError.message}`);
+        }
+    }
+}
+
+// DIRECT WEBHOOK SUBMISSION TO SPECIFIC ENDPOINT
+async function submitToN8nWebhookDirect(endpoint, email, firstName = '', source = 'unknown', buttonElement = null) {
+    console.log(`🔍 WEBHOOK DEBUG: submitToN8nWebhookDirect called with:`, {
+        endpoint: endpoint,
+        email: email,
+        firstName: firstName,
+        source: source
+    });
+
+    const payload = {
+        email: email,
+        firstName: firstName || '',
+        source: source
+    };
+
+    console.log(`📦 WEBHOOK DEBUG: Final payload being sent to ${endpoint}:`, payload);
+    console.log(`📦 WEBHOOK DEBUG: Payload JSON string:`, JSON.stringify(payload));
+
+    const response = await fetch(endpoint, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(payload)
+    });
+
+    console.log(`📡 WEBHOOK DEBUG: Response from ${endpoint}:`, {
+        status: response.status,
+        statusText: response.statusText
+    });
+
+    if (!response.ok) {
+        const errorText = await response.text();
+        console.error(`❌ WEBHOOK DEBUG: Error response from ${endpoint}:`, errorText);
+        throw new Error(`HTTP ${response.status}: ${response.statusText} - ${errorText}`);
+    }
+
+    const result = await response.json();
+    console.log(`✅ WEBHOOK DEBUG: Success response from ${endpoint}:`, result);
+    return result;
+}
+
+// PROFESSIONAL NOTIFICATION SYSTEM
+function showNotification(message, type = 'success') {
+    // Remove any existing notifications
+    const existingNotifications = document.querySelectorAll('.webhook-notification');
+    existingNotifications.forEach(notif => notif.remove());
+
+    // Create notification element
+    const notification = document.createElement('div');
+    notification.className = `webhook-notification webhook-${type}`;
+
+    // Create notification content structure
+    const notificationContent = document.createElement('div');
+    notificationContent.className = 'notification-content';
+
+    const iconSpan = document.createElement('span');
+    iconSpan.className = 'notification-icon';
+    iconSpan.textContent = type === 'success' ? '🎉' : '⚠️';
+
+    const messageSpan = document.createElement('span');
+    messageSpan.className = 'notification-message';
+    messageSpan.textContent = message; // SECURE: Using textContent instead of innerHTML
+
+    const closeButton = document.createElement('button');
+    closeButton.className = 'notification-close';
+    closeButton.textContent = '×';
+    closeButton.onclick = () => notification.remove();
+
+    // Assemble notification
+    notificationContent.appendChild(iconSpan);
+    notificationContent.appendChild(messageSpan);
+    notificationContent.appendChild(closeButton);
+    notification.appendChild(notificationContent);
+
+    // Add to top of page
+    document.body.insertBefore(notification, document.body.firstChild);
+
+    // Auto-remove after 5 seconds
+    setTimeout(() => {
+        if (notification.parentElement) {
+            notification.remove();
+        }
+    }, 5000);
+}
+
+// LOADING STATE MANAGEMENT
+function setButtonLoading(buttonElement, isLoading) {
+    if (!buttonElement) return;
+
+    if (isLoading) {
+        buttonElement.disabled = true;
+        buttonElement.dataset.originalText = buttonElement.textContent;
+        buttonElement.innerHTML = '<span class="loading-spinner"></span> Submitting...';
+        buttonElement.style.opacity = '0.7';
+        buttonElement.style.cursor = 'not-allowed';
+    } else {
+        buttonElement.disabled = false;
+        buttonElement.textContent = buttonElement.dataset.originalText || buttonElement.textContent;
+        buttonElement.style.opacity = '1';
+        buttonElement.style.cursor = 'pointer';
+    }
+}
+
+// MAIN WEBHOOK SUBMISSION FUNCTION - TESTS BOTH ENDPOINTS & REDIRECTS
+async function submitToN8nWebhook(email, firstName = '', source = 'unknown', buttonElement = null) {
+    try {
+        console.log(`🚀 WEBHOOK DEBUG: Starting submission from ${source}:`, { email, firstName });
+
+        // Show loading state
+        setButtonLoading(buttonElement, true);
+
+        // Test both webhook endpoints
+        const result = await testWebhookEndpoints(email, firstName, source, buttonElement);
+
+        console.log('✅ WEBHOOK DEBUG: Webhook submission successful:', result);
+
+        // Show success notification
+        showNotification('🎉 Success! Redirecting to your free course...', 'success');
+
+        // REDIRECT TO ANTI-STACK.CO AFTER SUCCESSFUL SUBMISSION
+        setTimeout(() => {
+            console.log('🔄 WEBHOOK DEBUG: Redirecting to anti-stack.co');
+            window.location.href = 'https://anti-stack.co';
+        }, 1500); // Brief delay to show success message
+
+        return result;
+    } catch (error) {
+        console.error('💥 WEBHOOK DEBUG: Submission failed:', {
+            name: error.name,
+            message: error.message,
+            stack: error.stack
+        });
+
+        // Enhanced error handling with specific debugging
+        let errorMessage = 'Webhook failed. Please try again.';
+        let debugInfo = '';
+
+        if (error.name === 'TypeError' && error.message.includes('fetch')) {
+            errorMessage = 'Connection failed - please check your internet connection.';
+            debugInfo = 'Network/CORS error';
+        } else if (error.message.includes('404')) {
+            errorMessage = 'Webhook endpoint not found. Please contact support.';
+            debugInfo = 'URL 404 error - both webhook endpoints returned 404';
+        } else if (error.message.includes('500')) {
+            errorMessage = 'Server error occurred. Please try again in a moment.';
+            debugInfo = 'Server 500 error';
+        } else if (error.message.includes('400')) {
+            errorMessage = 'Invalid request. Please check your email and try again.';
+            debugInfo = 'Bad request 400 error';
+        } else if (error.message.includes('CORS')) {
+            errorMessage = 'Security error. Please contact support.';
+            debugInfo = 'CORS policy error';
+        } else if (error.message.includes('Both webhook endpoints failed')) {
+            errorMessage = 'All webhook endpoints failed. Please contact support.';
+            debugInfo = 'Both primary and alternative endpoints failed';
+        }
+
+        console.error(`🔧 WEBHOOK DEBUG: Error category: ${debugInfo}`);
+        showNotification(`${errorMessage} (Debug: ${debugInfo})`, 'error');
+        throw error;
+    } finally {
+        // Always remove loading state
+        setButtonLoading(buttonElement, false);
+    }
+}
+
+// HERO SECTION SIGNUP - OPTIMIZED FOR EMAIL + BUTTON LAYOUT
+function signupHero() {
+    try {
+        console.log('🔥 FORM DEBUG: signupHero() function called');
+
+        const emailInput = document.getElementById('hero-email');
+        const submitButton = document.querySelector('.cta-button');
+
+        console.log('🔍 FORM DEBUG: Form elements found:', {
+            emailInput: emailInput,
+            emailInputValue: emailInput ? emailInput.value : 'ELEMENT NOT FOUND',
+            submitButton: submitButton
+        });
+
+        const email = emailInput ? emailInput.value.trim() : '';
+        const firstName = ''; // No firstName input in hero section for optimal conversions
+
+        console.log('🎯 FORM DEBUG: Captured form values:', {
+            email: email,
+            firstName: firstName,
+            source: 'hero-section'
+        });
+
+        // Enhanced email validation
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+        if (!email) {
+            console.log('❌ FORM DEBUG: Email validation failed - empty email');
+            showNotification('Please enter your email address', 'error');
+            if (emailInput) emailInput.focus();
+            return;
+        }
+
+        if (!emailRegex.test(email)) {
+            console.log('❌ FORM DEBUG: Email validation failed - invalid format:', email);
+            showNotification('Please enter a valid email address', 'error');
+            if (emailInput) emailInput.focus();
+            return;
+        }
+
+        console.log('✅ FORM DEBUG: Email validation passed, calling webhook with:', {
+            email: email,
+            firstName: firstName,
+            source: 'hero-section'
+        });
+
+        // Submit to n8n webhook with loading state
+        submitToN8nWebhook(email, firstName, 'hero-section', submitButton)
+            .then(() => {
+                // Clear form on success
+                if (emailInput) emailInput.value = '';
+                console.log('🧹 FORM DEBUG: Form cleared after successful submission');
+            })
+            .catch(error => {
+                console.error('💥 FORM DEBUG: Hero signup failed:', error);
+                // Error already handled in submitToN8nWebhook
+            });
+
+    } catch (error) {
+        console.error('🚨 FORM DEBUG: Hero signup error:', error);
+        showNotification('Something went wrong. Please try again.', 'error');
+    }
+}
+
+// ANTI-STACK SECTION SIGNUP
+function signupAntiStack() {
+    try {
+        const emailInput = document.getElementById('antistack-email');
+        const firstNameInput = document.getElementById('antistack-firstName');
+        const submitButton = document.querySelector('.anti-stack-btn-final');
+
+        const email = emailInput ? emailInput.value.trim() : '';
+        const firstName = firstNameInput ? firstNameInput.value.trim() : '';
+
+        // Enhanced email validation
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+        if (!email) {
+            showNotification('Please enter your email address', 'error');
+            if (emailInput) emailInput.focus();
+            return;
+        }
+
+        if (!emailRegex.test(email)) {
+            showNotification('Please enter a valid email address', 'error');
+            if (emailInput) emailInput.focus();
+            return;
+        }
+
+        // Submit to n8n webhook with loading state
+        submitToN8nWebhook(email, firstName, 'anti-stack-section', submitButton)
+            .then(() => {
+                // Clear form on success
+                if (emailInput) emailInput.value = '';
+                if (firstNameInput) firstNameInput.value = '';
+            })
+            .catch(error => {
+                console.error('Anti-stack signup failed:', error);
+                // Error already handled in submitToN8nWebhook
+            });
+
+    } catch (error) {
+        console.error('Anti-stack signup error:', error);
+        showNotification('Something went wrong. Please try again.', 'error');
+    }
+}
+
+// FOOTER SECTION SIGNUP
+function signupFooter() {
+    try {
+        const emailInput = document.getElementById('footer-email');
+        const firstNameInput = document.getElementById('footer-firstName');
+        const submitButton = document.querySelector('.signup-button-footer');
+
+        const email = emailInput ? emailInput.value.trim() : '';
+        const firstName = firstNameInput ? firstNameInput.value.trim() : '';
+
+        // Enhanced email validation
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+        if (!email) {
+            showNotification('Please enter your email address', 'error');
+            if (emailInput) emailInput.focus();
+            return;
+        }
+
+        if (!emailRegex.test(email)) {
+            showNotification('Please enter a valid email address', 'error');
+            if (emailInput) emailInput.focus();
+            return;
+        }
+
+        // Submit to n8n webhook with loading state
+        submitToN8nWebhook(email, firstName, 'footer-section', submitButton)
+            .then(() => {
+                // Clear form on success
+                if (emailInput) emailInput.value = '';
+                if (firstNameInput) firstNameInput.value = '';
+            })
+            .catch(error => {
+                console.error('Footer signup failed:', error);
+                // Error already handled in submitToN8nWebhook
+            });
+
+    } catch (error) {
+        console.error('Footer signup error:', error);
+        showNotification('Something went wrong. Please try again.', 'error');
+    }
+}
+
+</script>
+
+{{#is "post, page"}}
+    {{> "pswp"}}
+{{/is}}
+
+<script src="{{asset "built/main.min.js"}}"></script>
+
+{{ghost_foot}}
+
+</body>
+</html>

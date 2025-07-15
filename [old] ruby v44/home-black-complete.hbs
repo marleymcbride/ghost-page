@@ -1,0 +1,849 @@
+{{!< default}}
+
+<main class="landing-page">
+    {{!-- Hero Section - IMMEDIATE BLACK BACKGROUND --}}
+    <section class="hero-section">
+        <div class="gh-inner">
+            <div class="hero-content">
+                <h1 class="hero-title">
+                    Train less. Have more energy.<br>
+                    Live The Natty Sweet Spot.
+                </h1>
+                <p class="hero-subtitle">
+                    Join 700+ executives getting weekly insights on natural performance optimization, plus <strong>instant access to my complete 3-week energy transformation system.</strong>
+                </p>
+                <div class="hero-cta">
+                    <div class="email-signup">
+                        <input type="email" placeholder="Enter your email" class="email-input" id="hero-email">
+                        <button class="cta-button" onclick="signupHero()">Get Started Free</button>
+                    </div>
+                    <p class="cta-subtext">New guide every week. Unsubscribe anytime.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    {{!-- Featured Posts Section --}}
+    <section class="content-section">
+        <div class="gh-inner">
+            <div class="section-header">
+                <h2>START HERE</h2>
+            </div>
+
+            <div class="featured-post-home">
+                <article class="featured-post-card">
+                    <div class="featured-image-home">
+                        <a href="https://marleymcbride.co/posts/the-natty-sweet-spot/">
+                            <img src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" alt="The Natty Sweet Spot">
+                        </a>
+                        <span class="featured-tag-home">HEALTH</span>
+                    </div>
+
+                    <div class="featured-content-home">
+                        <h3 class="featured-title-home">
+                            <a href="https://marleymcbride.co/posts/the-natty-sweet-spot/">The Natty Sweet Spot (Full Guide)</a>
+                        </h3>
+                        <p class="featured-excerpt-home">Welcome to The Full Guide to The Natty Sweet Spot. This is your optimal natural male physique at 11-14% body fat where performance, aesthetics, and health converge without extreme measures.</p>
+                        <div class="featured-meta-home">
+                            <span class="reading-time">12 min read</span>
+                            <a href="https://marleymcbride.co/posts/the-natty-sweet-spot/" class="featured-read-home">Read Full Guide →</a>
+                        </div>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    {{!-- Transformation Stats Section --}}
+    <section class="stats-section">
+        <div class="gh-inner">
+            <div class="stats-content">
+                <div class="stats-text">
+                    <h2>The Results Speak For Themselves</h2>
+                    <p>Real transformations from executives who decided to take back control of their energy and physique.</p>
+                </div>
+
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-number">1000+</div>
+                        <div class="stat-label">Days Alcohol-Free</div>
+                        <div class="stat-desc">No meetings required</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">1 Year</div>
+                        <div class="stat-label">Caffeine-Free</div>
+                        <div class="stat-desc">Natural energy all day</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">2-3x</div>
+                        <div class="stat-label">Weekly Training</div>
+                        <div class="stat-desc">Elite results, minimal time</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">Client L</div>
+                        <div class="stat-label">35lbs Lost</div>
+                        <div class="stat-desc">15+ months sober</div>
+                    </div>
+                </div>
+
+                <div class="stats-cta">
+                    <a href="/limitless-protocol" class="primary-cta">
+                        Get The Limitless Protocol™
+                    </a>
+                    <p class="guarantee">60-day money-back guarantee</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    {{!-- Latest Content Section --}}
+    <section class="content-section">
+        <div class="gh-inner">
+            <div class="section-header">
+                <h2>Latest Guides</h2>
+                <p class="section-subtitle">New stuff I'm working on</p>
+            </div>
+
+            <div class="content-grid">
+                {{#get "posts" limit="3" as |recent_posts|}}
+                    {{#foreach recent_posts}}
+                        <article class="content-card">
+                            {{#if feature_image}}
+                                <div class="content-image">
+                                    <img src="{{feature_image}}" alt="{{title}}">
+                                    {{#primary_tag}}
+                                        <span class="content-tag">{{name}}</span>
+                                    {{/primary_tag}}
+                                </div>
+                            {{/if}}
+
+                            <div class="content-text">
+                                <h3><a href="{{url}}">{{title}}</a></h3>
+                                <p>{{excerpt}}</p>
+                                <div class="content-meta">
+                                    <span class="read-time">{{reading_time}}</span>
+                                    <a href="{{url}}" class="read-more">Read Guide →</a>
+                                </div>
+                            </div>
+                        </article>
+                    {{/foreach}}
+                {{/get}}
+            </div>
+
+            <div class="cta-center">
+                <a href="/posts" class="secondary-cta">View All Guides</a>
+            </div>
+        </div>
+    </section>
+
+    {{!-- About Me Section - PURE BLACK BACKGROUND + REWRITTEN COPY --}}
+    <section class="about-section">
+        <div class="gh-inner">
+            <div class="about-content">
+                <div class="about-header">
+                    <p class="about-label">ABOUT ME</p>
+                    <h2 class="about-title">Who Is Marley McBride?</h2>
+                    <p class="about-tagline">Just a guy who got sick of feeling like shit every morning.</p>
+                </div>
+
+                <div class="about-main">
+                    <div class="about-left">
+                        <div class="about-avatar">
+                            <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=400&q=80" alt="Marley McBride" class="author-photo">
+                            <div class="social-links">
+                                <a href="#" aria-label="Instagram"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg></a>
+                                <a href="#" aria-label="Twitter"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z"/></svg></a>
+                                <a href="#" aria-label="YouTube"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg></a>
+                                <a href="#" aria-label="LinkedIn"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg></a>
+                            </div>
+                        </div>
+
+                        <div class="about-brand">
+                            <div class="brand-logo">M</div>
+                            <div class="brand-text">
+                                <h4>Fix Your Energy. Build Your Physique. Live Limitless.</h4>
+                                <p>I help high-earning executives break free from caffeine and alcohol dependencies while building elite physiques that command respect.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="about-right">
+                        <h3>Hey, I'm Marley.</h3>
+                        <p>Two years ago, I was you. Successful on paper but feeling like absolute shit every morning. Six coffees to start the day, alcohol to wind down, and wondering when the hell I'd actually feel like myself again.</p>
+
+                        <p>Here's what nobody tells you: being "health-conscious" isn't enough. You can hit the gym 5 times a week, track your macros, and still feel trapped in the 4% zone - better than the masses but nowhere near your potential.</p>
+
+                        <p>The Limitless Protocol changed everything. Now I wake up with genuine energy, train 2-3 times per week with elite results, and haven't touched caffeine or alcohol in over a year. No willpower required.</p>
+
+                        <p><strong>I'm not taking 1-on-1 clients or "brain-picking" calls. If you want to transform your energy and physique, everything you need is in my guides and courses above.</strong></p>
+
+                        <div class="about-signup">
+                            <h4>Ready To Break The Cycle?</h4>
+                            <p>Join 700+ executives who've ditched the morning fog and reclaimed their natural energy. No corporate wellness bullshit.</p>
+                            <div class="signup-feature">
+                                <span>📧 Weekly insights that actually work</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+
+<style>
+.landing-page {
+    background: var(--color-white) !important;
+    color: var(--color-primary-text) !important;
+    min-height: 100vh;
+}
+
+/* Hero Section - IMMEDIATE BLACK BACKGROUND */
+.hero-section {
+    padding: 120px 0 160px !important;
+    background: #000000 !important;
+    text-align: center;
+}
+
+.hero-content {
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.hero-title {
+    font-size: 5rem !important;
+    font-weight: 800 !important;
+    line-height: 1.1 !important;
+    margin-bottom: 36px !important;
+    color: #ffffff !important;
+}
+
+.hero-subtitle {
+    font-size: 1.6rem !important;
+    line-height: 1.5 !important;
+    color: #d1d5db !important;
+    margin-bottom: 60px !important;
+    max-width: 800px !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    margin-bottom: 60px !important;
+}
+
+.hero-subtitle strong {
+    color: #ffffff !important;
+    font-weight: 700 !important;
+}
+
+.email-signup {
+    display: flex;
+    gap: 16px;
+    margin-bottom: 20px;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+    justify-content: center;
+}
+
+.email-input {
+    flex: 1;
+    padding: 20px 24px;
+    border: 2px solid #374151;
+    border-radius: 12px;
+    background: #ffffff !important;
+    color: #000000 !important;
+    font-size: 1.2rem;
+    max-width: 350px;
+}
+
+.email-input:focus {
+    outline: none;
+    border-color: #940909;
+    box-shadow: 0 0 0 3px rgba(148, 9, 9, 0.1);
+}
+
+.email-input::placeholder {
+    color: #6b7280 !important;
+}
+
+/* NEW RED COLOR #940909 */
+.cta-button {
+    padding: 20px 40px !important;
+    background: #940909 !important;
+    color: white !important;
+    border: none !important;
+    border-radius: 12px !important;
+    font-weight: 700 !important;
+    font-size: 1.2rem !important;
+    cursor: pointer !important;
+    transition: all 0.2s ease !important;
+    white-space: nowrap !important;
+}
+
+.cta-button:hover {
+    background: #7a0808 !important;
+    transform: translateY(-2px);
+    box-shadow: 0 12px 30px rgba(148, 9, 9, 0.4);
+}
+
+.cta-subtext {
+    color: #9ca3af !important;
+    font-size: 1.1rem;
+    text-align: center;
+}
+
+/* Content Section */
+.content-section {
+    padding: 100px 0 !important;
+    background: var(--color-white) !important;
+}
+
+/* Stats Section */
+.stats-section {
+    padding: 100px 0 !important;
+    background: #f8fafc !important;
+    border-top: 1px solid var(--color-light-gray) !important;
+    border-bottom: 1px solid var(--color-light-gray) !important;
+}
+
+.stats-content {
+    text-align: center;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.stats-text h2 {
+    font-size: 3.5rem !important;
+    font-weight: 700 !important;
+    margin-bottom: 24px !important;
+    color: var(--color-primary-text) !important;
+}
+
+.stats-text p {
+    font-size: 1.4rem !important;
+    color: var(--color-secondary-text) !important;
+    margin-bottom: 60px !important;
+}
+
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 40px;
+    margin-bottom: 60px;
+}
+
+.stat-card {
+    background: var(--color-white);
+    padding: 40px 20px;
+    border-radius: 16px;
+    text-align: center;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+}
+
+.stat-card:hover {
+    transform: translateY(-4px);
+}
+
+.stat-number {
+    font-size: 2.5rem !important;
+    font-weight: 700 !important;
+    color: #940909 !important;
+    margin-bottom: 8px !important;
+}
+
+.stat-label {
+    font-size: 1.3rem !important;
+    font-weight: 600 !important;
+    color: var(--color-primary-text) !important;
+    margin-bottom: 4px !important;
+}
+
+.stat-desc {
+    font-size: 1rem !important;
+    color: var(--color-secondary-text) !important;
+}
+
+.stats-cta {
+    text-align: center;
+}
+
+.primary-cta {
+    display: inline-block;
+    padding: 24px 48px;
+    background: #940909 !important;
+    color: white !important;
+    text-decoration: none;
+    border-radius: 12px;
+    font-weight: 700;
+    font-size: 1.3rem;
+    transition: all 0.2s ease;
+}
+
+.primary-cta:hover {
+    background: #7a0808 !important;
+    transform: translateY(-3px);
+    box-shadow: 0 12px 30px rgba(148, 9, 9, 0.4);
+    text-decoration: none;
+    color: white !important;
+}
+
+.guarantee {
+    margin-top: 16px;
+    font-size: 1rem;
+    color: var(--color-secondary-text) !important;
+}
+
+/* Section Headers */
+.section-header {
+    text-align: center;
+    margin-bottom: 80px;
+}
+
+.section-header h2 {
+    font-size: 3.5rem !important;
+    font-weight: 700;
+    margin-bottom: 24px;
+    color: var(--color-primary-text) !important;
+}
+
+.section-subtitle {
+    font-size: 1.6rem !important;
+    color: var(--color-secondary-text) !important;
+    max-width: 700px;
+    margin: 0 auto;
+    line-height: 1.5;
+}
+
+/* Featured Post */
+.featured-post-home {
+    margin-bottom: 80px;
+}
+
+.featured-post-card {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    align-items: center;
+    background: var(--color-white) !important;
+    border: 1px solid var(--color-light-gray);
+    border-radius: 16px;
+    overflow: hidden;
+    padding: 40px;
+    transition: all 0.3s ease;
+}
+
+.featured-post-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+}
+
+.featured-image-home {
+    position: relative;
+    border-radius: 12px;
+    overflow: hidden;
+    aspect-ratio: 16/10;
+}
+
+.featured-image-home img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+.featured-image-home:hover img {
+    transform: scale(1.05);
+}
+
+.featured-tag-home {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    background: #940909 !important;
+    color: white !important;
+    padding: 8px 16px;
+    border-radius: 6px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    text-transform: uppercase;
+}
+
+.featured-title-home {
+    font-size: 2.4rem !important;
+    font-weight: 700;
+    line-height: 1.2;
+    margin-bottom: 20px;
+}
+
+.featured-title-home a {
+    color: var(--color-primary-text) !important;
+    text-decoration: none;
+}
+
+.featured-title-home a:hover {
+    color: #940909 !important;
+}
+
+.featured-excerpt-home {
+    font-size: 1.2rem !important;
+    line-height: 1.6;
+    color: var(--color-secondary-text) !important;
+    margin-bottom: 24px;
+}
+
+.featured-meta-home {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    font-size: 1rem;
+}
+
+.featured-meta-home .reading-time {
+    color: var(--color-secondary-text) !important;
+}
+
+.featured-read-home {
+    color: #940909 !important;
+    text-decoration: none;
+    font-weight: 600;
+    margin-left: auto;
+}
+
+.featured-read-home:hover {
+    color: #7a0808 !important;
+}
+
+/* Content Grid */
+.content-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
+    gap: 40px;
+    margin-bottom: 80px;
+}
+
+.content-card {
+    background: var(--color-white) !important;
+    border: 1px solid var(--color-light-gray);
+    border-radius: 16px;
+    overflow: hidden;
+    transition: all 0.3s ease;
+}
+
+.content-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+}
+
+.content-image {
+    position: relative;
+    aspect-ratio: 16/9;
+    overflow: hidden;
+}
+
+.content-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.content-tag {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    background: #940909 !important;
+    color: white !important;
+    padding: 8px 16px;
+    border-radius: 6px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    text-transform: uppercase;
+}
+
+.content-text {
+    padding: 40px;
+}
+
+.content-text h3 {
+    margin-bottom: 20px;
+}
+
+.content-text h3 a {
+    color: var(--color-primary-text) !important;
+    text-decoration: none;
+    font-size: 1.6rem !important;
+    font-weight: 600;
+}
+
+.content-text h3 a:hover {
+    color: #940909 !important;
+}
+
+.content-text p {
+    color: var(--color-secondary-text) !important;
+    line-height: 1.6;
+    margin-bottom: 24px;
+    font-size: 1.1rem !important;
+}
+
+.content-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.read-time {
+    font-size: 1rem;
+    color: var(--color-secondary-text) !important;
+}
+
+.read-more {
+    color: #940909 !important;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 1rem;
+}
+
+.read-more:hover {
+    color: #7a0808 !important;
+}
+
+/* CTAs */
+.cta-center {
+    text-align: center;
+}
+
+.secondary-cta {
+    display: inline-block;
+    padding: 18px 36px;
+    background: transparent;
+    color: var(--color-primary-text) !important;
+    border: 2px solid var(--color-light-gray);
+    text-decoration: none;
+    border-radius: 12px;
+    font-weight: 600;
+    transition: all 0.2s ease;
+    font-size: 1.1rem;
+}
+
+.secondary-cta:hover {
+    background: var(--color-lighter-gray) !important;
+    border-color: #940909 !important;
+    color: var(--color-primary-text) !important;
+    text-decoration: none;
+    transform: translateY(-2px);
+}
+
+/* About Section - PURE BLACK BACKGROUND + NEW COPY */
+.about-section {
+    padding: 120px 0 !important;
+    background: #000000 !important;
+    color: #ffffff !important;
+}
+
+.about-content {
+    max-width: 1200px !important;
+    margin: 0 auto !important;
+}
+
+.about-header {
+    text-align: center;
+    margin-bottom: 80px;
+}
+
+.about-label {
+    font-size: 1.2rem;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: #9ca3af !important;
+    margin-bottom: 16px;
+}
+
+.about-title {
+    font-size: 4rem !important;
+    font-weight: 800 !important;
+    color: #ffffff !important;
+    margin-bottom: 16px !important;
+}
+
+.about-tagline {
+    font-size: 1.6rem !important;
+    color: #d1d5db !important;
+    margin-bottom: 0 !important;
+}
+
+.about-main {
+    display: grid !important;
+    grid-template-columns: 400px 1fr !important;
+    gap: 80px !important;
+    align-items: start !important;
+}
+
+.about-left {
+    display: flex;
+    flex-direction: column;
+    gap: 60px;
+}
+
+.about-avatar {
+    text-align: center;
+}
+
+.about-avatar .author-photo {
+    width: 300px !important;
+    height: 300px !important;
+    border-radius: 50%;
+    object-fit: cover;
+    margin: 0 auto 30px;
+}
+
+.social-links {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+.social-links a {
+    color: #9ca3af !important;
+    transition: color 0.2s ease;
+}
+
+.social-links a:hover {
+    color: #ffffff !important;
+}
+
+.about-brand {
+    display: flex;
+    align-items: flex-start;
+    gap: 20px;
+}
+
+.brand-logo {
+    width: 60px;
+    height: 60px;
+    background: #ffffff;
+    color: #000000;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2.4rem;
+    font-weight: 700;
+    flex-shrink: 0;
+}
+
+.brand-text h4 {
+    font-size: 1.8rem !important;
+    font-weight: 700 !important;
+    color: #ffffff !important;
+    margin-bottom: 12px !important;
+}
+
+.brand-text p {
+    font-size: 1.2rem !important;
+    color: #d1d5db !important;
+    line-height: 1.6 !important;
+    margin: 0 !important;
+}
+
+.about-right {
+    padding-left: 40px;
+}
+
+.about-right h3 {
+    font-size: 2.4rem !important;
+    font-weight: 700 !important;
+    color: #ffffff !important;
+    margin-bottom: 24px !important;
+}
+
+.about-right p {
+    font-size: 1.4rem !important;
+    line-height: 1.6 !important;
+    color: #d1d5db !important;
+    margin-bottom: 24px !important;
+}
+
+.about-right p strong {
+    color: #ffffff !important;
+}
+
+.about-signup {
+    margin-top: 60px;
+    padding: 40px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 16px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.about-signup h4 {
+    font-size: 2rem !important;
+    font-weight: 700 !important;
+    color: #ffffff !important;
+    margin-bottom: 16px !important;
+}
+
+.about-signup p {
+    font-size: 1.3rem !important;
+    color: #d1d5db !important;
+    margin-bottom: 20px !important;
+}
+
+.signup-feature {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 1.2rem !important;
+    color: #ffffff !important;
+    font-weight: 600;
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+    .about-main {
+        grid-template-columns: 1fr !important;
+        gap: 60px !important;
+        text-align: center !important;
+    }
+
+    .about-right {
+        padding-left: 0 !important;
+    }
+
+    .about-brand {
+        justify-content: center !important;
+    }
+}
+
+@media (max-width: 768px) {
+    .hero-title { font-size: 3.5rem !important; }
+    .hero-subtitle { font-size: 1.4rem !important; }
+    .about-title { font-size: 3rem !important; }
+    .stats-text h2 { font-size: 2.5rem !important; }
+    .section-header h2 { font-size: 2.5rem !important; }
+    .email-signup { flex-direction: column; align-items: center; }
+    .content-grid { grid-template-columns: 1fr; }
+    .stats-grid { grid-template-columns: repeat(2, 1fr); }
+    .hero-section { padding: 80px 0 100px; }
+    .content-section, .stats-section, .about-section { padding: 80px 0; }
+    .featured-post-card { grid-template-columns: 1fr; gap: 30px; }
+    .about-avatar .author-photo { width: 200px !important; height: 200px !important; }
+}
+</style>
+
+<script>
+function signupHero() {
+    const email = document.getElementById('hero-email').value;
+    if (!email) {
+        alert('Please enter your email address');
+        return;
+    }
+
+    // Open the auth modal for signup
+    const modal = document.getElementById('auth-modal');
+    if (modal) {
+        modal.style.display = 'flex';
+        document.body.style.overflow = 'hidden';
+    }
+}
+</script>

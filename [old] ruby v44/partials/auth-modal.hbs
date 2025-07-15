@@ -43,8 +43,15 @@
 
 <style>
 .auth-modal {
-    position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 999999;
-    display: flex; align-items: center; justify-content: center;
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+    z-index: 999999 !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
 }
 .auth-modal-overlay {
     position: absolute; top: 0; left: 0; width: 100%; height: 100%;
@@ -96,6 +103,40 @@
 .auth-btn-signup:hover { background-color: #f3f4f6; border-color: #9ca3af; color: #111827; }
 .auth-modal-trigger { cursor: pointer; transition: all 0.2s ease; }
 .auth-modal-trigger:hover { transform: translateY(-1px); box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1); }
+
+/* GHOST PORTAL BLOCKING - Hide all native Ghost portal elements */
+.gh-portal-root,
+.portal-container,
+[data-portal-root],
+[data-ghost-portal],
+.gh-portal-popup,
+.gh-portal-backdrop,
+.gh-portal-content,
+[id*="ghost-portal"],
+[class*="portal-"]:not(.auth-modal):not(.auth-modal *),
+.ghost-portal,
+[data-members-portal],
+.gh-portal-frame,
+.gh-portal-overlay,
+div[data-portal],
+iframe[src*="portal"],
+iframe[src*="ghost"] {
+    display: none !important;
+    visibility: hidden !important;
+    opacity: 0 !important;
+    z-index: -9999 !important;
+    pointer-events: none !important;
+    position: absolute !important;
+    top: -10000px !important;
+    left: -10000px !important;
+}
+
+/* Ensure our custom auth modal always shows on top */
+.auth-modal {
+    z-index: 999999 !important;
+    position: fixed !important;
+}
+
 @media (max-width: 640px) {
     .auth-modal-content { width: 95%; margin: 20px; }
     .auth-modal-header, .auth-modal-body { padding-left: 20px; padding-right: 20px; }
@@ -341,6 +382,56 @@
             return false;
         }
 
+        // Enhanced Ghost Portal Blocking
+        function blockGhostPortal() {
+            try {
+                // Block Ghost portal at multiple levels
+                if (window.ghost && window.ghost.portal) {
+                    window.ghost.portal.init = () => console.log('Portal init blocked');
+                    window.ghost.portal.open = () => console.log('Portal open blocked');
+                }
+
+                // Remove portal elements immediately and continuously
+                const portalSelectors = [
+                    '.gh-portal-root',
+                    '.portal-container',
+                    '[data-portal-root]',
+                    '[data-ghost-portal]',
+                    '.gh-portal-popup',
+                    '.gh-portal-backdrop',
+                    '.gh-portal-content',
+                    '[id*="ghost-portal"]',
+                    '[class*="portal-"]',
+                    '.ghost-portal',
+                    '[data-members-portal]'
+                ];
+
+                portalSelectors.forEach(selector => {
+                    const elements = document.querySelectorAll(selector);
+                    elements.forEach(el => {
+                        el.remove();
+                        console.log('Removed Ghost portal element:', selector);
+                    });
+                });
+
+                // Block any iframe that might contain portal
+                const iframes = document.querySelectorAll('iframe');
+                iframes.forEach(iframe => {
+                    if (iframe.src && (iframe.src.includes('portal') || iframe.src.includes('ghost'))) {
+                        iframe.remove();
+                        console.log('Removed Ghost portal iframe');
+                    }
+                });
+
+            } catch (error) {
+                console.warn('Error blocking Ghost portal:', error);
+            }
+        }
+
+        // Run portal blocking immediately and repeatedly
+        blockGhostPortal();
+        setInterval(blockGhostPortal, 500);
+
         // Run initially and on DOM changes (for dynamically added buttons)
         interceptPortalButtons();
 
@@ -416,21 +507,7 @@
             });
         }
 
-        // Run blog post subscription interception
-        interceptBlogPostSubscriptions();
-
-        // OPTIMIZED: Single interval for all interception checks
-        const interceptInterval = setInterval(() => {
-            try {
-                interceptPortalButtons();
-                interceptBlogPostSubscriptions();
-                interceptEmailForms();
-            } catch (error) {
-                console.warn('Auth modal interception error:', error);
-            }
-        }, 2000);
-
-        // Handle email subscription forms in blog posts
+        // Email form interception for blog posts
         function interceptEmailForms() {
             try {
                 const emailForms = document.querySelectorAll('.gh-content form, form[action*="portal"], form[action*="subscribe"]');
@@ -443,11 +520,9 @@
                             openModal();
                         });
                         form.setAttribute('data-form-intercepted', 'true');
-                        console.log('Intercepted email form:', form);
                     }
                 });
 
-                // Also intercept email inputs with subscription context
                 const emailInputs = document.querySelectorAll('.gh-content input[type="email"], input[placeholder*="email" i]');
                 emailInputs.forEach(input => {
                     const form = input.closest('form');
@@ -456,18 +531,15 @@
                         form.addEventListener('submit', function(e) {
                             e.preventDefault();
                             e.stopPropagation();
-                            console.log('Email input form submission intercepted');
                             openModal();
                         });
                         form.setAttribute('data-form-intercepted', 'true');
                     }
 
-                    // Handle enter key on email inputs
                     if (!input.getAttribute('data-input-intercepted')) {
                         input.addEventListener('keypress', function(e) {
                             if (e.key === 'Enter') {
                                 e.preventDefault();
-                                console.log('Email input enter key intercepted');
                                 openModal();
                             }
                         });
@@ -479,14 +551,32 @@
             }
         }
 
-        // Run email form interception initially
-        interceptEmailForms();
+        // Run blog post subscription interception
+        interceptBlogPostSubscriptions();
 
-        // Cleanup function for page unload
-        window.addEventListener('beforeunload', () => {
-            if (interceptInterval) {
-                clearInterval(interceptInterval);
+        // ELITE PERFORMANCE: Single optimized interval for all interception
+        const interceptInterval = setInterval(() => {
+            try {
+                // Ghost portal blocking
+                blockGhostPortal();
+
+                // Portal button interception
+                interceptPortalButtons();
+
+                // Blog post subscription interception
+                interceptBlogPostSubscriptions();
+
+                // Email form interception
+                interceptEmailForms();
+
+            } catch (error) {
+                console.warn('Interception error:', error);
             }
+        }, 1500); // Optimized timing
+
+        // Cleanup on page unload
+        window.addEventListener('beforeunload', () => {
+            if (interceptInterval) clearInterval(interceptInterval);
         });
 
         const observer = new MutationObserver(interceptPortalButtons);

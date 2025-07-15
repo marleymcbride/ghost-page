@@ -1,0 +1,32 @@
+@import "@tryghost/shared-theme-assets/assets/css/v1/screen.css";
+@import "general/fonts.css";
+@import "general/basics.css";
+@import "site/header.css";
+@import "site/layout.css";
+@import "site/term.css";
+@import "blog/post.css";
+@import "blog/featured.css";
+@import "blog/article.css";
+@import "blog/author.css";
+@import "blog/navigation.css";
+@import "blog/comment.css";
+@import "blog/related.css";
+@import "misc/utilities.css";
+
+/* ————————————————————————————————
+   Custom footer override (must come after everything)
+   ———————————————————————————————— */
+   .gh-footer-signup {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 4rem 1rem;
+  }
+  
+  .gh-footer-signup .gh-form {
+    margin-top: 2rem;
+    display: flex;
+    gap: 0.5rem;
+    justify-content: center;
+  }  

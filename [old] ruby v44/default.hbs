@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="{{@site.locale}}">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{{meta_title}}</title>
+    <link rel="stylesheet" href="{{asset "built/screen.css"}}?v=2024-footer-fixed">
+    <!-- FOOTER FIXED: v2024-complete -->
+
+    {{ghost_head}}
+</head>
+
+<body class="{{body_class}}{{{block "body_class"}}} is-head-{{#match @custom.navigation_layout "Logo on the left"}}left-logo{{else match @custom.navigation_layout "Logo in the middle"}}middle-logo{{else}}stacked{{/match}}{{#match @custom.title_font "=" "Elegant serif"}} has-serif-title{{/match}}{{#match @custom.body_font "=" "Elegant serif"}} has-serif-body{{/match}}">
+<div class="gh-site">
+
+    <header id="gh-head" class="gh-head gh-outer">
+        <div class="gh-head-inner gh-inner">
+            <div class="gh-head-brand">
+                <div class="gh-head-brand-wrapper">
+                    <a class="gh-head-logo" href="{{@site.url}}">
+                        {{#if @site.logo}}
+                            <img src="{{@site.logo}}" alt="{{@site.title}}">
+                        {{else}}
+                            {{@site.title}}
+                        {{/if}}
+                    </a>
+                </div>
+                <button class="gh-search gh-icon-btn" aria-label="Search this site" data-ghost-search>{{> "icons/search"}}</button>
+                <button class="gh-burger" aria-label="Toggle menu"></button>
+            </div>
+
+            <nav class="gh-head-menu">
+                <a class="nav-link {{#is "home"}}nav-current{{/is}}" href="{{@site.url}}">Home</a>
+                <a class="nav-link {{#is "index"}}nav-current{{/is}}" href="{{@site.url}}/posts">GUIDES</a>
+                <a class="nav-link" href="/anti-stack">Anti-Stack</a>
+                <a class="nav-link" href="/limitless-protocol">Limitless</a>
+                <a class="nav-link" href="/about">More</a>
+                {{#unless @site.members_enabled}}
+                    {{#match @custom.navigation_layout "Stacked"}}
+                        {{> "darkmode"}}<button class="gh-search gh-icon-btn" aria-label="Search this site" data-ghost-search>{{> "icons/search"}}</button>
+                    {{/match}}
+                {{/unless}}
+            </nav>
+
+            <div class="gh-head-actions">
+                {{#unless @site.members_enabled}}
+                    {{^match @custom.navigation_layout "Stacked"}}
+                        {{> "darkmode"}}<button class="gh-search gh-icon-btn" aria-label="Search this site" data-ghost-search>{{> "icons/search"}}</button>
+                    {{/match}}
+                {{else}}
+                    {{> "darkmode"}}<button class="gh-search gh-icon-btn" aria-label="Search this site" data-ghost-search>{{> "icons/search"}}</button>
+                    <div class="gh-head-members">
+                        {{#unless @member}}
+                            <button class="gh-head-btn gh-btn gh-primary-btn auth-modal-trigger" type="button">
+                                SIGN IN OR SIGN UP
+                            </button>
+                        {{else}}
+                            <a class="gh-head-btn gh-btn gh-primary-btn" href="#/portal/account" data-portal="account">Account</a>
+                        {{/unless}}
+                    </div>
+                {{/unless}}
+            </div>
+        </div>
+    </header>
+
+    <div class="site-content">
+        {{{body}}}
+    </div>
+
+    <footer class="gh-foot gh-outer">
+  <div class="gh-foot-inner">
+
+    {{!-- 50/50 flex container --}}
+    <div class="footer-signup">
+      {{!-- LEFT 50%: "M" + text --}}
+      <div class="footer-signup-text">
+        <div class="footer-text">
+          <h3>Ready to break the cycle?</h3>
+          <p>Join 700+ guys who are done with feeling exhausted</p>
+          <p>and ready to feel incredible naturally.</p>
+        </div>
+      </div>
+
+      {{!-- RIGHT 50%: email form --}}
+      <div class="footer-signup-form">
+        <div class="footer-form-container">
+          <div class="footer-form">
+            <input
+              type="text"
+              placeholder="first name (optional)"
+              class="name-input-footer"
+              id="footer-firstName"
+            >
+            <input
+              type="email"
+              placeholder="enter email address"
+              class="email-input-footer"
+              id="footer-email"
+              required
+            >
+            <button
+              class="signup-button-footer"
+              onclick="signupFooter()"
+            >Subscribe</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    {{!-- BELOW: meta bar --}}
+    <div class="footer-meta">
+      <div class="gh-copyright">
+        {{@site.title}} © {{date format="YYYY"}}
+      </div>
+      <div class="gh-powered-by">
+        <a href="" target="_blank" rel="noopener">
+          All Rights Reserved.
+        </a>
+      </div>
+      <nav class="gh-foot-menu">
+        <a href="/privacy-policy">Privacy Policy</a>
+      </nav>
+    </div>
+
+  </div>
+</footer>
+
+</div>
+
+{{> "auth-modal"}}
+
+<script>
+// ELITE N8N WEBHOOK CONFIGURATION
+// Set via Ghost Admin > Settings > Code Injection > Site Header:
+// <script>window.N8N_WEBHOOK_BASE_URL = 'https://your-n8n-domain.com';</script>
+const WEBHOOK_BASE_URL = window.N8N_WEBHOOK_BASE_URL || 'https://n8n.marleymcbride.com';
+const WEBHOOK_ENDPOINT = `${WEBHOOK_BASE_URL}/webhook/systeme-add-contact`;
+
+// Configuration validation
+if (!window.N8N_WEBHOOK_BASE_URL) {
+    console.warn('⚠️ N8N_WEBHOOK_BASE_URL not configured. Using default. Set via Ghost Admin > Code Injection.');
+}
+
+// PROFESSIONAL NOTIFICATION SYSTEM
+function showNotification(message, type = 'success') {
+    // Remove any existing notifications
+    const existingNotifications = document.querySelectorAll('.webhook-notification');
+    existingNotifications.forEach(notif => notif.remove());
+
+    // Create notification element
+    const notification = document.createElement('div');
+    notification.className = `webhook-notification webhook-${type}`;
+    notification.innerHTML = `
+        <div class="notification-content">
+            <span class="notification-icon">${type === 'success' ? '🎉' : '⚠️'}</span>
+            <span class="notification-message">${message}</span>
+            <button class="notification-close" onclick="this.parentElement.parentElement.remove()">×</button>
+        </div>
+    `;
+
+    // Add to top of page
+    document.body.insertBefore(notification, document.body.firstChild);
+
+    // Auto-remove after 5 seconds
+    setTimeout(() => {
+        if (notification.parentElement) {
+            notification.remove();
+        }
+    }, 5000);
+}
+
+// LOADING STATE MANAGEMENT
+function setButtonLoading(buttonElement, isLoading) {
+    if (!buttonElement) return;
+
+    if (isLoading) {
+        buttonElement.disabled = true;
+        buttonElement.dataset.originalText = buttonElement.textContent;
+        buttonElement.innerHTML = '<span class="loading-spinner"></span> Submitting...';
+        buttonElement.style.opacity = '0.7';
+        buttonElement.style.cursor = 'not-allowed';
+    } else {
+        buttonElement.disabled = false;
+        buttonElement.textContent = buttonElement.dataset.originalText || buttonElement.textContent;
+        buttonElement.style.opacity = '1';
+        buttonElement.style.cursor = 'pointer';
+    }
+}
+
+// ENHANCED WEBHOOK SUBMISSION FUNCTION
+async function submitToN8nWebhook(email, firstName = '', source = 'unknown', buttonElement = null) {
+    try {
+        console.log(`Submitting to n8n webhook from ${source}:`, { email, firstName });
+
+        // Show loading state
+        setButtonLoading(buttonElement, true);
+
+        const response = await fetch(WEBHOOK_ENDPOINT, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                email: email,
+                firstName: firstName || ''
+            })
+        });
+
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status} - ${response.statusText}`);
+        }
+
+        const result = await response.json();
+        console.log('N8n webhook success:', result);
+
+        // Show success notification
+        showNotification('🎉 Success! Check your email for instant access to your free course.', 'success');
+
+        return result;
+    } catch (error) {
+        console.error('N8n webhook error:', error);
+
+        // Enhanced error handling
+        let errorMessage = 'Something went wrong. Please try again.';
+
+        if (error.name === 'TypeError' && error.message.includes('fetch')) {
+            errorMessage = 'Connection error. Please check your internet connection and try again.';
+        } else if (error.message.includes('CORS')) {
+            errorMessage = 'Configuration error. Please contact support.';
+        } else if (error.message.includes('400')) {
+            errorMessage = 'Invalid data. Please check your email address and try again.';
+        } else if (error.message.includes('500')) {
+            errorMessage = 'Server error. Please try again in a moment.';
+        }
+
+        showNotification(errorMessage, 'error');
+        throw error;
+    } finally {
+        // Always remove loading state
+        setButtonLoading(buttonElement, false);
+    }
+}
+
+// HERO SECTION SIGNUP
+function signupHero() {
+    try {
+        const emailInput = document.getElementById('hero-email');
+        const firstNameInput = document.getElementById('hero-firstName');
+        const submitButton = document.querySelector('.cta-button');
+
+        const email = emailInput ? emailInput.value.trim() : '';
+        const firstName = firstNameInput ? firstNameInput.value.trim() : '';
+
+        // Enhanced email validation
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+        if (!email) {
+            showNotification('Please enter your email address', 'error');
+            if (emailInput) emailInput.focus();
+            return;
+        }
+
+        if (!emailRegex.test(email)) {
+            showNotification('Please enter a valid email address', 'error');
+            if (emailInput) emailInput.focus();
+            return;
+        }
+
+        // Submit to n8n webhook with loading state
+        submitToN8nWebhook(email, firstName, 'hero-section', submitButton)
+            .then(() => {
+                // Clear form on success
+                if (emailInput) emailInput.value = '';
+                if (firstNameInput) firstNameInput.value = '';
+            })
+            .catch(error => {
+                console.error('Hero signup failed:', error);
+                // Error already handled in submitToN8nWebhook
+            });
+
+    } catch (error) {
+        console.error('Hero signup error:', error);
+        showNotification('Something went wrong. Please try again.', 'error');
+    }
+}
+
+// ANTI-STACK SECTION SIGNUP
+function signupAntiStack() {
+    try {
+        const emailInput = document.getElementById('antistack-email');
+        const firstNameInput = document.getElementById('antistack-firstName');
+        const submitButton = document.querySelector('.anti-stack-btn-final');
+
+        const email = emailInput ? emailInput.value.trim() : '';
+        const firstName = firstNameInput ? firstNameInput.value.trim() : '';
+
+        // Enhanced email validation
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+        if (!email) {
+            showNotification('Please enter your email address', 'error');
+            if (emailInput) emailInput.focus();
+            return;
+        }
+
+        if (!emailRegex.test(email)) {
+            showNotification('Please enter a valid email address', 'error');
+            if (emailInput) emailInput.focus();
+            return;
+        }
+
+        // Submit to n8n webhook with loading state
+        submitToN8nWebhook(email, firstName, 'anti-stack-section', submitButton)
+            .then(() => {
+                // Clear form on success
+                if (emailInput) emailInput.value = '';
+                if (firstNameInput) firstNameInput.value = '';
+            })
+            .catch(error => {
+                console.error('Anti-stack signup failed:', error);
+                // Error already handled in submitToN8nWebhook
+            });
+
+    } catch (error) {
+        console.error('Anti-stack signup error:', error);
+        showNotification('Something went wrong. Please try again.', 'error');
+    }
+}
+
+// FOOTER SECTION SIGNUP - Elite n8n webhook integration
+function signupFooter() {
+    try {
+        const emailInput = document.getElementById('footer-email');
+        const firstNameInput = document.getElementById('footer-firstName');
+        const submitButton = document.querySelector('.signup-button-footer');
+
+        const email = emailInput ? emailInput.value.trim() : '';
+        const firstName = firstNameInput ? firstNameInput.value.trim() : '';
+
+        // Enhanced email validation
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+        if (!email) {
+            showNotification('Please enter your email address', 'error');
+            if (emailInput) emailInput.focus();
+            return;
+        }
+
+        if (!emailRegex.test(email)) {
+            showNotification('Please enter a valid email address', 'error');
+            if (emailInput) emailInput.focus();
+            return;
+        }
+
+        // Submit to n8n webhook with loading state
+        submitToN8nWebhook(email, firstName, 'footer-section', submitButton)
+            .then(() => {
+                // Clear form on success
+                if (emailInput) emailInput.value = '';
+                if (firstNameInput) firstNameInput.value = '';
+            })
+            .catch(error => {
+                console.error('Footer signup failed:', error);
+                // Error already handled in submitToN8nWebhook
+            });
+
+    } catch (error) {
+        console.error('Footer signup error:', error);
+        showNotification('Something went wrong. Please try again.', 'error');
+    }
+}
+
+// ELITE MOBILE MENU + AUTH MODAL HANDLER
+document.addEventListener('DOMContentLoaded', function() {
+    const authModal = document.getElementById('auth-modal');
+    const hamburger = document.querySelector('.gh-burger');
+    const header = document.querySelector('.gh-head');
+
+    // Single, clean function to open auth modal
+    function openAuthModal() {
+        if (!authModal) {
+            console.warn('Auth modal not found');
+            window.location.href = '#/portal/signup'; // Fallback
+            return;
+        }
+
+        // Always close mobile menu first
+        if (header && header.classList.contains('is-open')) {
+            header.classList.remove('is-open');
+            if (hamburger) hamburger.classList.remove('is-active');
+        }
+
+        // Open modal with maximum z-index
+        authModal.style.display = 'flex';
+        authModal.style.zIndex = '999999';
+        document.body.style.overflow = 'hidden';
+
+        // Focus first button
+        setTimeout(() => {
+            const firstButton = authModal.querySelector('.auth-btn');
+            if (firstButton) firstButton.focus();
+        }, 100);
+    }
+
+    // Single event delegation for ALL auth triggers
+    document.addEventListener('click', function(e) {
+        const target = e.target.closest('.auth-modal-trigger');
+        if (target) {
+            e.preventDefault();
+            e.stopPropagation();
+            openAuthModal();
+        }
+    }, true); // Use capture to catch early
+
+    console.log('Elite auth modal handler initialized');
+});
+</script>
+
+{{#is "post, page"}}
+    {{> "pswp"}}
+{{/is}}
+
+<script src="{{asset "built/main.min.js"}}"></script>
+
+{{ghost_foot}}
+
+</body>
+</html>
